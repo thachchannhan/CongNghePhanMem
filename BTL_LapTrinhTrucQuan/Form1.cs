@@ -42,5 +42,20 @@ namespace BTL_LapTrinhTrucQuan
         {
             tabControl1.SelectedIndex = 0;
         }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
