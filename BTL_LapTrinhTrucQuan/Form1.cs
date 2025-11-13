@@ -17,34 +17,14 @@ namespace BTL_LapTrinhTrucQuan
             InitializeComponent();
         }
 
-        private void Menu_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void grbMenu_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLichSu_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
         }
     }
 }
