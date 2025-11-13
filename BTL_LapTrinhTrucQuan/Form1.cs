@@ -26,5 +26,21 @@ namespace BTL_LapTrinhTrucQuan
         {
             tabControl1.SelectedIndex = 1;
         }
+
+        private void btnMua_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 3;
+
+        }
+
+        private void btnKhachHang_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void btnBDK_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
     }
 }
