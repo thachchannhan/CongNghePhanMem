@@ -17,12 +17,14 @@ namespace BTL_LapTrinhTrucQuan
         private SqlConnection conn;
         private SqlDataAdapter da;
         private DataTable dtPhim;
-        private const string connectionString = "Data Source=DESKTOP-V7DI0T1;Initial Catalog=RAPPHIM;Integrated Security=True";
+        private const string connectionString = "Data Source=DESKTOP-L7HKKMB;Initial Catalog=QLPhimPho;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
             LoadDataPhim(); // Gọi hàm tải dữ liệu khi khởi tạo form
+            GanSuKienChoTatCaGhe();
         }
+
         private void LoadDataPhim()
         {
             // ... (Khởi tạo conn, dtPhim, connectionString như cũ)
@@ -69,19 +71,16 @@ namespace BTL_LapTrinhTrucQuan
             {
                 DataGridViewRow row = dgvDSPhim.Rows[e.RowIndex];
 
-                
-                    txtMaPhim.Text = row.Cells["ID_PHIM"].Value.ToString();
-                    txtTenPhim.Text = row.Cells["TENPHIM"].Value.ToString();
-                    txtTheLoai.Text = row.Cells["THELOAI"].Value.ToString();
 
-                    object thoiLuongValue = row.Cells["THOILUONG"].Value;
-                    txtThoiLuong.Text = (thoiLuongValue == DBNull.Value) ? string.Empty : thoiLuongValue.ToString();
+                txtMaPhim.Text = row.Cells["ID_PHIM"].Value.ToString();
+                txtTenPhim.Text = row.Cells["TENPHIM"].Value.ToString();
+                txtTheLoai.Text = row.Cells["THELOAI"].Value.ToString();
+
+                object thoiLuongValue = row.Cells["THOILUONG"].Value;
+                txtThoiLuong.Text = (thoiLuongValue == DBNull.Value) ? string.Empty : thoiLuongValue.ToString();
             }
         }
-        private void grbMenu_Enter(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnLichSu_Click(object sender, EventArgs e)
         {
@@ -117,19 +116,147 @@ namespace BTL_LapTrinhTrucQuan
             txtThoiLuong.Text = string.Empty;
         }
 
-        private void tabPage4_Click(object sender, EventArgs e)
+        private List<string> danhSachGheDaChon = new List<string>();
+        private const int GIA_GHE_MAC_DINH = 60000;
+        private void GanSuKienChoTatCaGhe()
         {
+            TabPage tabGhe = tabControl1.TabPages[3];
+            foreach (Control control in tabGhe.Controls)
+            {
+                // Kiểm tra xem control đó có phải là Button không
+                if (control is Button btnGhe)
+                {
+                    // Kiểm tra xem Button này có phải là nút ghế thực sự (có tên ghế, vd: A1, B6)
+                    if (btnGhe.Text.Length == 2 && Char.IsLetter(btnGhe.Text[0]) && Char.IsDigit(btnGhe.Text[1]))
+                    {
+                        // Gán sự kiện Click cho nút ghế đó vào hàm xử lý chung
+                        btnGhe.Click += new EventHandler(XuLyClickGhe);
+                    }
+                }
+            }
+        }
+        private static readonly Color MAU_GHE_DA_CHON = Color.LightBlue;
+        private static readonly Color MAU_GHE_CHUA_CHON = Color.LightYellow;
+        private void XuLyClickGhe(object sender, EventArgs e)
+        {
+            // Biến sender chính là nút (Button) vừa được click
+            {
+                Button btnGhe = (Button)sender;
+                string tenGhe = btnGhe.Text;
 
+                // Logic chọn/hủy chọn ghế
+                if (danhSachGheDaChon.Contains(tenGhe))
+                {
+                    // 1. Nếu ghế đã chọn -> Hủy chọn
+                    // ĐẶT LẠI MÀU VÀNG BAN ĐẦU
+                    btnGhe.BackColor = MAU_GHE_CHUA_CHON;
+                    danhSachGheDaChon.Remove(tenGhe);
+                }
+                else
+                {
+                    // 2. Nếu ghế chưa chọn -> Chọn ghế
+                    // ĐẶT MÀU XANH KHI ĐƯỢC CHỌN
+                    btnGhe.BackColor = MAU_GHE_DA_CHON;
+                    danhSachGheDaChon.Add(tenGhe);
+                }
+
+                CapNhatThongTinThanhToan();
+            }
+        }
+        private void CapNhatThongTinThanhToan()
+        {
+            txtGheDaChon.Text = string.Join(", ", danhSachGheDaChon);
+
+            int tongSoGhe = danhSachGheDaChon.Count;
+            long tongTien = (long)tongSoGhe * GIA_GHE_MAC_DINH;
+
+
+            txtGheDaChon.Text = string.Join(", ", danhSachGheDaChon);
+            txtGheDaChon.ReadOnly = true; // <--- VÔ HIỆU HÓA CHỈNH SỬA
+
+            // 3. Cập nhật và vô hiệu hóa chỉnh sửa cho txtTongTienThanhToan
+            txtSoTien_KH.Text = tongTien.ToString("N0") + " VNĐ";
+            txtSoTien_KH.ReadOnly = true; // <--- VÔ HIỆU HÓA CHỈNH SỬA
+                                          }
+
+        private void btnXacNhan_KH_Click(object sender, EventArgs e)
+        {
+            if (rdbPhong2D_KH.Checked || rdbPhong3D_KH.Checked || rdbPhongIMAX_KH.Checked)
+            {
+                MessageBox.Show("Đã xác nhận phòng.", "Xác nhận", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Sau khi xác nhận, bạn có thể vô hiệu hóa các lựa chọn phòng để tránh thay đổi
+                // rdbPhong2D.Enabled = false;
+                // ...
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn loại phòng trước khi xác nhận.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void rdbDienTu_KH_CheckedChanged(object sender, EventArgs e)
         {
-
+         
         }
 
-        private void grbMenu_Enter_1(object sender, EventArgs e)
+        private void btnXoa_KH_Click(object sender, EventArgs e)
         {
+            danhSachGheDaChon.Clear();
+            CapNhatThongTinThanhToan();
 
+            rdbPhong2D_KH.Checked = false;
+            rdbPhong3D_KH.Checked = false;
+            rdbPhongIMAX_KH.Checked = false;
+            // ... và các RadioButton thanh toán ...
+            rdbTienMat_KH.Checked = false;
+            rdbDienTu_KH.Checked = false;
+            TabPage tabGhe = tabControl1.TabPages[3];
+            foreach (Control control in tabGhe.Controls)
+            {
+                if (control is Button btnGhe)
+                {
+                    // Kiểm tra xem Button này có phải là nút ghế thực sự (có tên ghế, vd: A1, B6)
+                    if (btnGhe.Text.Length == 2 && Char.IsLetter(btnGhe.Text[0]) && Char.IsDigit(btnGhe.Text[1]))
+                    {
+                        // Đặt lại màu nền về màu mặc định (ví dụ: Control hoặc LightGray)
+                        btnGhe.BackColor = MAU_GHE_CHUA_CHON; // <--- SỬ DỤNG MÀU VÀNG                    }
+                    }
+                }
+            }
+        }
+
+        private void btnMua_KH_Click(object sender, EventArgs e)
+        {
+            if (rdbDienTu_KH.Checked)
+            {
+                string tongTienText = txtSoTien_KH.Text.Replace(" VNĐ", "").Replace(",", "");
+                long tongTien = 0;
+                long.TryParse(tongTienText, out tongTien);
+                ThanhToan formThanhToan = new ThanhToan();
+                // *Quan trọng*: Chuyển dữ liệu Tổng tiền sang Form ThanhToan (nếu Form ThanhToan có phương thức/thuộc tính để nhận)
+                // Đây là ví dụ về cách truyền dữ liệu qua constructor hoặc thuộc tính:
+
+                // Giả sử Form ThanhToan có một hàm tên là LoadThongTin(long soTien)
+                formThanhToan.LoadThongTin(tongTien);
+                formThanhToan.ShowDialog();
+            }
+            else if (rdbTienMat_KH.Checked)
+            {
+                // 2. Logic cho Thanh toán tiền mặt (Thường là lưu vé ngay lập tức)
+                // Lưu thông tin vé vào CSDL
+                // ... (Gọi hàm Lưu vé) ...
+
+                MessageBox.Show("Thanh toán tiền mặt hoàn tất. Vé đã được lưu.");
+
+                // Xóa dữ liệu trên Form hiện tại
+                // ... (Gọi hàm Xóa / Reset Form) ...
+            }
+            else
+            {
+                // 3. Trường hợp chưa chọn phương thức thanh toán
+                MessageBox.Show("Vui lòng chọn phương thức thanh toán (Tiền mặt hoặc Điện tử) trước khi mua vé.");
+            }
         }
     }
 }

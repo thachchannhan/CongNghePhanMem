@@ -57,25 +57,37 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnMail = new System.Windows.Forms.Button();
+            this.btnLuu = new System.Windows.Forms.Button();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.txtPN = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUS = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.rdbDienTu = new System.Windows.Forms.RadioButton();
-            this.rdbTienMat = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btnMua_KH = new System.Windows.Forms.Button();
+            this.btnXoa_KH = new System.Windows.Forms.Button();
+            this.rdbDienTu_KH = new System.Windows.Forms.RadioButton();
+            this.rdbTienMat_KH = new System.Windows.Forms.RadioButton();
+            this.txtSoTien_KH = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdbIMAX = new System.Windows.Forms.RadioButton();
-            this.rdb3D = new System.Windows.Forms.RadioButton();
-            this.rdb2D = new System.Windows.Forms.RadioButton();
+            this.rdbPhongIMAX_KH = new System.Windows.Forms.RadioButton();
+            this.rdbPhong3D_KH = new System.Windows.Forms.RadioButton();
+            this.rdbPhong2D_KH = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
-            this.button40 = new System.Windows.Forms.Button();
+            this.btnXacNhan_KH = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtGheDaChon = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button36 = new System.Windows.Forms.Button();
@@ -127,19 +139,6 @@
             this.btnMua = new System.Windows.Forms.Button();
             this.btnBDK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtUS = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtPN = new System.Windows.Forms.TextBox();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.btnLuu = new System.Windows.Forms.Button();
-            this.btnMail = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -148,6 +147,12 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -157,12 +162,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -201,14 +200,13 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // txtTheLoai
             // 
             this.txtTheLoai.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTheLoai.Location = new System.Drawing.Point(495, 16);
             this.txtTheLoai.Name = "txtTheLoai";
-            this.txtTheLoai.Size = new System.Drawing.Size(106, 26);
+            this.txtTheLoai.Size = new System.Drawing.Size(194, 26);
             this.txtTheLoai.TabIndex = 14;
             // 
             // txtThoiLuong
@@ -216,7 +214,7 @@
             this.txtThoiLuong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtThoiLuong.Location = new System.Drawing.Point(495, 66);
             this.txtThoiLuong.Name = "txtThoiLuong";
-            this.txtThoiLuong.Size = new System.Drawing.Size(106, 26);
+            this.txtThoiLuong.Size = new System.Drawing.Size(194, 26);
             this.txtThoiLuong.TabIndex = 13;
             // 
             // txtTenPhim
@@ -224,7 +222,7 @@
             this.txtTenPhim.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenPhim.Location = new System.Drawing.Point(141, 66);
             this.txtTenPhim.Name = "txtTenPhim";
-            this.txtTenPhim.Size = new System.Drawing.Size(100, 26);
+            this.txtTenPhim.Size = new System.Drawing.Size(180, 26);
             this.txtTenPhim.TabIndex = 12;
             // 
             // txtMaPhim
@@ -232,7 +230,7 @@
             this.txtMaPhim.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaPhim.Location = new System.Drawing.Point(141, 16);
             this.txtMaPhim.Name = "txtMaPhim";
-            this.txtMaPhim.Size = new System.Drawing.Size(100, 26);
+            this.txtMaPhim.Size = new System.Drawing.Size(180, 26);
             this.txtMaPhim.TabIndex = 10;
             // 
             // groupBox1
@@ -469,6 +467,144 @@
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.BackColor = System.Drawing.Color.Crimson;
+            this.groupBox5.Controls.Add(this.groupBox6);
+            this.groupBox5.Location = new System.Drawing.Point(157, 5);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(408, 435);
+            this.groupBox5.TabIndex = 11;
+            this.groupBox5.TabStop = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.Color.White;
+            this.groupBox6.Controls.Add(this.btnMail);
+            this.groupBox6.Controls.Add(this.btnLuu);
+            this.groupBox6.Controls.Add(this.pictureBox9);
+            this.groupBox6.Controls.Add(this.pictureBox8);
+            this.groupBox6.Controls.Add(this.pictureBox7);
+            this.groupBox6.Controls.Add(this.pictureBox6);
+            this.groupBox6.Controls.Add(this.txtMail);
+            this.groupBox6.Controls.Add(this.txtPN);
+            this.groupBox6.Controls.Add(this.txtPassword);
+            this.groupBox6.Controls.Add(this.txtUS);
+            this.groupBox6.Controls.Add(this.label18);
+            this.groupBox6.Location = new System.Drawing.Point(59, 57);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(300, 320);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            // 
+            // btnMail
+            // 
+            this.btnMail.BackColor = System.Drawing.Color.LightPink;
+            this.btnMail.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMail.ForeColor = System.Drawing.Color.White;
+            this.btnMail.Location = new System.Drawing.Point(203, 336);
+            this.btnMail.Name = "btnMail";
+            this.btnMail.Size = new System.Drawing.Size(75, 28);
+            this.btnMail.TabIndex = 11;
+            this.btnMail.Text = "Mail";
+            this.btnMail.UseVisualStyleBackColor = false;
+            // 
+            // btnLuu
+            // 
+            this.btnLuu.BackColor = System.Drawing.Color.LightPink;
+            this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLuu.ForeColor = System.Drawing.Color.White;
+            this.btnLuu.Location = new System.Drawing.Point(63, 336);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(75, 28);
+            this.btnLuu.TabIndex = 10;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(39, 135);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(32, 27);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 9;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(39, 187);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(32, 27);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 8;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(39, 236);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(32, 27);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 7;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(39, 89);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(32, 27);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 6;
+            this.pictureBox6.TabStop = false;
+            // 
+            // txtMail
+            // 
+            this.txtMail.ForeColor = System.Drawing.Color.Black;
+            this.txtMail.Location = new System.Drawing.Point(87, 236);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(177, 23);
+            this.txtMail.TabIndex = 4;
+            // 
+            // txtPN
+            // 
+            this.txtPN.ForeColor = System.Drawing.Color.Black;
+            this.txtPN.Location = new System.Drawing.Point(87, 187);
+            this.txtPN.Name = "txtPN";
+            this.txtPN.Size = new System.Drawing.Size(177, 23);
+            this.txtPN.TabIndex = 3;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.ForeColor = System.Drawing.Color.Black;
+            this.txtPassword.Location = new System.Drawing.Point(87, 135);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(177, 23);
+            this.txtPassword.TabIndex = 2;
+            // 
+            // txtUS
+            // 
+            this.txtUS.ForeColor = System.Drawing.Color.Black;
+            this.txtUS.Location = new System.Drawing.Point(87, 89);
+            this.txtUS.Name = "txtUS";
+            this.txtUS.Size = new System.Drawing.Size(177, 23);
+            this.txtUS.TabIndex = 1;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.LightPink;
+            this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(59, 35);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(212, 19);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "THÔNG TIN KHÁCH HÀNG";
+            // 
             // tabPage4
             // 
             this.tabPage4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage4.BackgroundImage")));
@@ -476,7 +612,7 @@
             this.tabPage4.Controls.Add(this.groupBox3);
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Controls.Add(this.textBox4);
-            this.tabPage4.Controls.Add(this.textBox5);
+            this.tabPage4.Controls.Add(this.txtGheDaChon);
             this.tabPage4.Controls.Add(this.label15);
             this.tabPage4.Controls.Add(this.label16);
             this.tabPage4.Controls.Add(this.button36);
@@ -523,7 +659,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // label12
             // 
@@ -541,12 +676,11 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.button38);
-            this.groupBox3.Controls.Add(this.button39);
-            this.groupBox3.Controls.Add(this.button37);
-            this.groupBox3.Controls.Add(this.rdbDienTu);
-            this.groupBox3.Controls.Add(this.rdbTienMat);
-            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.btnMua_KH);
+            this.groupBox3.Controls.Add(this.btnXoa_KH);
+            this.groupBox3.Controls.Add(this.rdbDienTu_KH);
+            this.groupBox3.Controls.Add(this.rdbTienMat_KH);
+            this.groupBox3.Controls.Add(this.txtSoTien_KH);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Location = new System.Drawing.Point(470, 187);
             this.groupBox3.Name = "groupBox3";
@@ -567,66 +701,59 @@
             this.label6.Text = "Thanh toán";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button38
+            // btnMua_KH
             // 
-            this.button38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button38.Location = new System.Drawing.Point(120, 167);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(96, 32);
-            this.button38.TabIndex = 10;
-            this.button38.Text = "Mua";
-            this.button38.UseVisualStyleBackColor = false;
+            this.btnMua_KH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnMua_KH.Location = new System.Drawing.Point(9, 181);
+            this.btnMua_KH.Name = "btnMua_KH";
+            this.btnMua_KH.Size = new System.Drawing.Size(96, 32);
+            this.btnMua_KH.TabIndex = 10;
+            this.btnMua_KH.Text = "Mua";
+            this.btnMua_KH.UseVisualStyleBackColor = false;
+            this.btnMua_KH.Click += new System.EventHandler(this.btnMua_KH_Click);
             // 
-            // button39
+            // btnXoa_KH
             // 
-            this.button39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button39.Location = new System.Drawing.Point(60, 205);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(96, 32);
-            this.button39.TabIndex = 9;
-            this.button39.Text = "Xóa";
-            this.button39.UseVisualStyleBackColor = false;
+            this.btnXoa_KH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnXoa_KH.Location = new System.Drawing.Point(118, 181);
+            this.btnXoa_KH.Name = "btnXoa_KH";
+            this.btnXoa_KH.Size = new System.Drawing.Size(96, 32);
+            this.btnXoa_KH.TabIndex = 9;
+            this.btnXoa_KH.Text = "Xóa";
+            this.btnXoa_KH.UseVisualStyleBackColor = false;
+            this.btnXoa_KH.Click += new System.EventHandler(this.btnXoa_KH_Click);
             // 
-            // button37
+            // rdbDienTu_KH
             // 
-            this.button37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button37.Location = new System.Drawing.Point(18, 167);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(96, 32);
-            this.button37.TabIndex = 7;
-            this.button37.Text = "Tạm tính";
-            this.button37.UseVisualStyleBackColor = false;
+            this.rdbDienTu_KH.AutoSize = true;
+            this.rdbDienTu_KH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbDienTu_KH.Location = new System.Drawing.Point(30, 114);
+            this.rdbDienTu_KH.Name = "rdbDienTu_KH";
+            this.rdbDienTu_KH.Size = new System.Drawing.Size(127, 19);
+            this.rdbDienTu_KH.TabIndex = 3;
+            this.rdbDienTu_KH.TabStop = true;
+            this.rdbDienTu_KH.Text = "Thanh toán điện tử";
+            this.rdbDienTu_KH.UseVisualStyleBackColor = true;
+            this.rdbDienTu_KH.CheckedChanged += new System.EventHandler(this.rdbDienTu_KH_CheckedChanged);
             // 
-            // rdbDienTu
+            // rdbTienMat_KH
             // 
-            this.rdbDienTu.AutoSize = true;
-            this.rdbDienTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbDienTu.Location = new System.Drawing.Point(30, 114);
-            this.rdbDienTu.Name = "rdbDienTu";
-            this.rdbDienTu.Size = new System.Drawing.Size(127, 19);
-            this.rdbDienTu.TabIndex = 3;
-            this.rdbDienTu.TabStop = true;
-            this.rdbDienTu.Text = "Thanh toán điện tử";
-            this.rdbDienTu.UseVisualStyleBackColor = true;
+            this.rdbTienMat_KH.AutoSize = true;
+            this.rdbTienMat_KH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbTienMat_KH.Location = new System.Drawing.Point(30, 87);
+            this.rdbTienMat_KH.Name = "rdbTienMat_KH";
+            this.rdbTienMat_KH.Size = new System.Drawing.Size(134, 19);
+            this.rdbTienMat_KH.TabIndex = 2;
+            this.rdbTienMat_KH.TabStop = true;
+            this.rdbTienMat_KH.Text = "Thanh toán tiền mặt";
+            this.rdbTienMat_KH.UseVisualStyleBackColor = true;
             // 
-            // rdbTienMat
+            // txtSoTien_KH
             // 
-            this.rdbTienMat.AutoSize = true;
-            this.rdbTienMat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbTienMat.Location = new System.Drawing.Point(30, 87);
-            this.rdbTienMat.Name = "rdbTienMat";
-            this.rdbTienMat.Size = new System.Drawing.Size(134, 19);
-            this.rdbTienMat.TabIndex = 2;
-            this.rdbTienMat.TabStop = true;
-            this.rdbTienMat.Text = "Thanh toán tiền mặt";
-            this.rdbTienMat.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(83, 52);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(107, 23);
-            this.textBox3.TabIndex = 1;
+            this.txtSoTien_KH.Location = new System.Drawing.Point(83, 52);
+            this.txtSoTien_KH.Name = "txtSoTien_KH";
+            this.txtSoTien_KH.Size = new System.Drawing.Size(107, 23);
+            this.txtSoTien_KH.TabIndex = 1;
             // 
             // label13
             // 
@@ -640,49 +767,49 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.rdbIMAX);
-            this.groupBox4.Controls.Add(this.rdb3D);
-            this.groupBox4.Controls.Add(this.rdb2D);
+            this.groupBox4.Controls.Add(this.rdbPhongIMAX_KH);
+            this.groupBox4.Controls.Add(this.rdbPhong3D_KH);
+            this.groupBox4.Controls.Add(this.rdbPhong2D_KH);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.button40);
+            this.groupBox4.Controls.Add(this.btnXacNhan_KH);
             this.groupBox4.Location = new System.Drawing.Point(470, 3);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(216, 178);
             this.groupBox4.TabIndex = 86;
             this.groupBox4.TabStop = false;
             // 
-            // rdbIMAX
+            // rdbPhongIMAX_KH
             // 
-            this.rdbIMAX.AutoSize = true;
-            this.rdbIMAX.Location = new System.Drawing.Point(30, 75);
-            this.rdbIMAX.Name = "rdbIMAX";
-            this.rdbIMAX.Size = new System.Drawing.Size(103, 21);
-            this.rdbIMAX.TabIndex = 15;
-            this.rdbIMAX.TabStop = true;
-            this.rdbIMAX.Text = "Phòng IMAX";
-            this.rdbIMAX.UseVisualStyleBackColor = true;
+            this.rdbPhongIMAX_KH.AutoSize = true;
+            this.rdbPhongIMAX_KH.Location = new System.Drawing.Point(30, 75);
+            this.rdbPhongIMAX_KH.Name = "rdbPhongIMAX_KH";
+            this.rdbPhongIMAX_KH.Size = new System.Drawing.Size(103, 21);
+            this.rdbPhongIMAX_KH.TabIndex = 15;
+            this.rdbPhongIMAX_KH.TabStop = true;
+            this.rdbPhongIMAX_KH.Text = "Phòng IMAX";
+            this.rdbPhongIMAX_KH.UseVisualStyleBackColor = true;
             // 
-            // rdb3D
+            // rdbPhong3D_KH
             // 
-            this.rdb3D.AutoSize = true;
-            this.rdb3D.Location = new System.Drawing.Point(30, 48);
-            this.rdb3D.Name = "rdb3D";
-            this.rdb3D.Size = new System.Drawing.Size(89, 21);
-            this.rdb3D.TabIndex = 14;
-            this.rdb3D.TabStop = true;
-            this.rdb3D.Text = "Phòng 3D";
-            this.rdb3D.UseVisualStyleBackColor = true;
+            this.rdbPhong3D_KH.AutoSize = true;
+            this.rdbPhong3D_KH.Location = new System.Drawing.Point(30, 48);
+            this.rdbPhong3D_KH.Name = "rdbPhong3D_KH";
+            this.rdbPhong3D_KH.Size = new System.Drawing.Size(89, 21);
+            this.rdbPhong3D_KH.TabIndex = 14;
+            this.rdbPhong3D_KH.TabStop = true;
+            this.rdbPhong3D_KH.Text = "Phòng 3D";
+            this.rdbPhong3D_KH.UseVisualStyleBackColor = true;
             // 
-            // rdb2D
+            // rdbPhong2D_KH
             // 
-            this.rdb2D.AutoSize = true;
-            this.rdb2D.Location = new System.Drawing.Point(30, 26);
-            this.rdb2D.Name = "rdb2D";
-            this.rdb2D.Size = new System.Drawing.Size(89, 21);
-            this.rdb2D.TabIndex = 13;
-            this.rdb2D.TabStop = true;
-            this.rdb2D.Text = "Phòng 2D";
-            this.rdb2D.UseVisualStyleBackColor = true;
+            this.rdbPhong2D_KH.AutoSize = true;
+            this.rdbPhong2D_KH.Location = new System.Drawing.Point(30, 26);
+            this.rdbPhong2D_KH.Name = "rdbPhong2D_KH";
+            this.rdbPhong2D_KH.Size = new System.Drawing.Size(89, 21);
+            this.rdbPhong2D_KH.TabIndex = 13;
+            this.rdbPhong2D_KH.TabStop = true;
+            this.rdbPhong2D_KH.Text = "Phòng 2D";
+            this.rdbPhong2D_KH.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -692,15 +819,16 @@
             this.label14.Size = new System.Drawing.Size(0, 17);
             this.label14.TabIndex = 12;
             // 
-            // button40
+            // btnXacNhan_KH
             // 
-            this.button40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button40.Location = new System.Drawing.Point(41, 108);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(141, 32);
-            this.button40.TabIndex = 11;
-            this.button40.Text = "Xác nhận";
-            this.button40.UseVisualStyleBackColor = false;
+            this.btnXacNhan_KH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnXacNhan_KH.Location = new System.Drawing.Point(41, 108);
+            this.btnXacNhan_KH.Name = "btnXacNhan_KH";
+            this.btnXacNhan_KH.Size = new System.Drawing.Size(141, 32);
+            this.btnXacNhan_KH.TabIndex = 11;
+            this.btnXacNhan_KH.Text = "Xác nhận";
+            this.btnXacNhan_KH.UseVisualStyleBackColor = false;
+            this.btnXacNhan_KH.Click += new System.EventHandler(this.btnXacNhan_KH_Click);
             // 
             // textBox4
             // 
@@ -709,12 +837,12 @@
             this.textBox4.Size = new System.Drawing.Size(186, 23);
             this.textBox4.TabIndex = 85;
             // 
-            // textBox5
+            // txtGheDaChon
             // 
-            this.textBox5.Location = new System.Drawing.Point(152, 377);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(186, 23);
-            this.textBox5.TabIndex = 84;
+            this.txtGheDaChon.Location = new System.Drawing.Point(152, 377);
+            this.txtGheDaChon.Name = "txtGheDaChon";
+            this.txtGheDaChon.Size = new System.Drawing.Size(186, 23);
+            this.txtGheDaChon.TabIndex = 84;
             // 
             // label15
             // 
@@ -731,7 +859,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.HotPink;
+            this.label16.ForeColor = System.Drawing.Color.Black;
             this.label16.Location = new System.Drawing.Point(43, 379);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(97, 18);
@@ -740,8 +868,8 @@
             // 
             // button36
             // 
-            this.button36.BackColor = System.Drawing.Color.PapayaWhip;
-            this.button36.Location = new System.Drawing.Point(332, 307);
+            this.button36.BackColor = System.Drawing.Color.LightYellow;
+            this.button36.Location = new System.Drawing.Point(332, 305);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(45, 25);
             this.button36.TabIndex = 81;
@@ -750,7 +878,7 @@
             // 
             // button35
             // 
-            this.button35.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button35.BackColor = System.Drawing.Color.LightYellow;
             this.button35.Location = new System.Drawing.Point(281, 305);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(45, 25);
@@ -760,7 +888,7 @@
             // 
             // button34
             // 
-            this.button34.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button34.BackColor = System.Drawing.Color.LightYellow;
             this.button34.Location = new System.Drawing.Point(19, 305);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(45, 25);
@@ -770,7 +898,7 @@
             // 
             // button33
             // 
-            this.button33.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button33.BackColor = System.Drawing.Color.LightYellow;
             this.button33.Location = new System.Drawing.Point(70, 305);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(45, 25);
@@ -780,7 +908,7 @@
             // 
             // button32
             // 
-            this.button32.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button32.BackColor = System.Drawing.Color.LightYellow;
             this.button32.Location = new System.Drawing.Point(152, 305);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(45, 25);
@@ -790,7 +918,7 @@
             // 
             // button31
             // 
-            this.button31.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button31.BackColor = System.Drawing.Color.LightYellow;
             this.button31.Location = new System.Drawing.Point(203, 305);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(45, 25);
@@ -800,7 +928,7 @@
             // 
             // button30
             // 
-            this.button30.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button30.BackColor = System.Drawing.Color.LightYellow;
             this.button30.Location = new System.Drawing.Point(332, 255);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(45, 25);
@@ -810,7 +938,7 @@
             // 
             // button29
             // 
-            this.button29.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button29.BackColor = System.Drawing.Color.LightYellow;
             this.button29.Location = new System.Drawing.Point(203, 255);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(45, 25);
@@ -820,7 +948,7 @@
             // 
             // button28
             // 
-            this.button28.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button28.BackColor = System.Drawing.Color.LightYellow;
             this.button28.Location = new System.Drawing.Point(281, 255);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(45, 25);
@@ -830,7 +958,7 @@
             // 
             // button27
             // 
-            this.button27.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button27.BackColor = System.Drawing.Color.LightYellow;
             this.button27.Location = new System.Drawing.Point(70, 255);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(45, 25);
@@ -840,7 +968,7 @@
             // 
             // button26
             // 
-            this.button26.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button26.BackColor = System.Drawing.Color.LightYellow;
             this.button26.Location = new System.Drawing.Point(152, 255);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(45, 25);
@@ -850,7 +978,7 @@
             // 
             // button25
             // 
-            this.button25.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button25.BackColor = System.Drawing.Color.LightYellow;
             this.button25.Location = new System.Drawing.Point(332, 207);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(45, 25);
@@ -860,7 +988,7 @@
             // 
             // button24
             // 
-            this.button24.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button24.BackColor = System.Drawing.Color.LightYellow;
             this.button24.Location = new System.Drawing.Point(19, 255);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(45, 25);
@@ -870,7 +998,7 @@
             // 
             // button23
             // 
-            this.button23.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button23.BackColor = System.Drawing.Color.LightYellow;
             this.button23.Location = new System.Drawing.Point(70, 207);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(45, 25);
@@ -880,7 +1008,7 @@
             // 
             // button22
             // 
-            this.button22.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button22.BackColor = System.Drawing.Color.LightYellow;
             this.button22.Location = new System.Drawing.Point(152, 207);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(45, 25);
@@ -890,7 +1018,7 @@
             // 
             // button21
             // 
-            this.button21.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button21.BackColor = System.Drawing.Color.LightYellow;
             this.button21.Location = new System.Drawing.Point(203, 207);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(45, 25);
@@ -900,7 +1028,7 @@
             // 
             // button20
             // 
-            this.button20.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button20.BackColor = System.Drawing.Color.LightYellow;
             this.button20.Location = new System.Drawing.Point(281, 207);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(45, 25);
@@ -910,7 +1038,7 @@
             // 
             // button19
             // 
-            this.button19.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button19.BackColor = System.Drawing.Color.LightYellow;
             this.button19.Location = new System.Drawing.Point(19, 207);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(45, 25);
@@ -920,7 +1048,7 @@
             // 
             // button18
             // 
-            this.button18.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button18.BackColor = System.Drawing.Color.LightYellow;
             this.button18.Location = new System.Drawing.Point(332, 146);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(45, 25);
@@ -930,7 +1058,7 @@
             // 
             // button17
             // 
-            this.button17.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button17.BackColor = System.Drawing.Color.LightYellow;
             this.button17.Location = new System.Drawing.Point(281, 146);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(45, 25);
@@ -940,7 +1068,7 @@
             // 
             // button16
             // 
-            this.button16.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button16.BackColor = System.Drawing.Color.LightYellow;
             this.button16.Location = new System.Drawing.Point(203, 146);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(45, 25);
@@ -950,7 +1078,7 @@
             // 
             // button15
             // 
-            this.button15.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button15.BackColor = System.Drawing.Color.LightYellow;
             this.button15.Location = new System.Drawing.Point(19, 146);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(45, 25);
@@ -960,7 +1088,7 @@
             // 
             // button14
             // 
-            this.button14.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button14.BackColor = System.Drawing.Color.LightYellow;
             this.button14.Location = new System.Drawing.Point(70, 146);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(45, 25);
@@ -970,7 +1098,7 @@
             // 
             // button13
             // 
-            this.button13.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button13.BackColor = System.Drawing.Color.LightYellow;
             this.button13.Location = new System.Drawing.Point(152, 146);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(45, 25);
@@ -980,7 +1108,7 @@
             // 
             // button12
             // 
-            this.button12.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button12.BackColor = System.Drawing.Color.LightYellow;
             this.button12.Location = new System.Drawing.Point(332, 95);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(45, 25);
@@ -990,7 +1118,7 @@
             // 
             // button11
             // 
-            this.button11.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button11.BackColor = System.Drawing.Color.LightYellow;
             this.button11.Location = new System.Drawing.Point(281, 95);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(45, 25);
@@ -1000,7 +1128,7 @@
             // 
             // button10
             // 
-            this.button10.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button10.BackColor = System.Drawing.Color.LightYellow;
             this.button10.Location = new System.Drawing.Point(203, 95);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(45, 25);
@@ -1010,7 +1138,7 @@
             // 
             // button9
             // 
-            this.button9.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button9.BackColor = System.Drawing.Color.LightYellow;
             this.button9.Location = new System.Drawing.Point(152, 95);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(45, 25);
@@ -1020,7 +1148,7 @@
             // 
             // button8
             // 
-            this.button8.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button8.BackColor = System.Drawing.Color.LightYellow;
             this.button8.Location = new System.Drawing.Point(70, 95);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(45, 25);
@@ -1030,7 +1158,7 @@
             // 
             // button7
             // 
-            this.button7.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button7.BackColor = System.Drawing.Color.LightYellow;
             this.button7.Location = new System.Drawing.Point(152, 47);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(45, 25);
@@ -1040,7 +1168,7 @@
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button6.BackColor = System.Drawing.Color.LightYellow;
             this.button6.Location = new System.Drawing.Point(203, 47);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(45, 25);
@@ -1050,7 +1178,7 @@
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button5.BackColor = System.Drawing.Color.LightYellow;
             this.button5.Location = new System.Drawing.Point(281, 47);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(45, 25);
@@ -1060,7 +1188,7 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button4.BackColor = System.Drawing.Color.LightYellow;
             this.button4.Location = new System.Drawing.Point(332, 47);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(45, 25);
@@ -1070,7 +1198,7 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button3.BackColor = System.Drawing.Color.LightYellow;
             this.button3.Location = new System.Drawing.Point(19, 95);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(45, 25);
@@ -1080,7 +1208,7 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button2.BackColor = System.Drawing.Color.LightYellow;
             this.button2.Location = new System.Drawing.Point(70, 47);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(45, 25);
@@ -1090,7 +1218,7 @@
             // 
             // button41
             // 
-            this.button41.BackColor = System.Drawing.Color.PapayaWhip;
+            this.button41.BackColor = System.Drawing.Color.LightYellow;
             this.button41.Location = new System.Drawing.Point(19, 47);
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(45, 25);
@@ -1102,7 +1230,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.HotPink;
+            this.label17.ForeColor = System.Drawing.Color.Black;
             this.label17.Location = new System.Drawing.Point(213, 4);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(180, 26);
@@ -1129,7 +1257,6 @@
             this.grbMenu.Size = new System.Drawing.Size(184, 457);
             this.grbMenu.TabIndex = 2;
             this.grbMenu.TabStop = false;
-            this.grbMenu.Enter += new System.EventHandler(this.grbMenu_Enter_1);
             // 
             // pictureBox5
             // 
@@ -1253,144 +1380,6 @@
             this.panel1.Size = new System.Drawing.Size(2, 457);
             this.panel1.TabIndex = 4;
             // 
-            // groupBox6
-            // 
-            this.groupBox6.BackColor = System.Drawing.Color.White;
-            this.groupBox6.Controls.Add(this.btnMail);
-            this.groupBox6.Controls.Add(this.btnLuu);
-            this.groupBox6.Controls.Add(this.pictureBox9);
-            this.groupBox6.Controls.Add(this.pictureBox8);
-            this.groupBox6.Controls.Add(this.pictureBox7);
-            this.groupBox6.Controls.Add(this.pictureBox6);
-            this.groupBox6.Controls.Add(this.txtMail);
-            this.groupBox6.Controls.Add(this.txtPN);
-            this.groupBox6.Controls.Add(this.txtPassword);
-            this.groupBox6.Controls.Add(this.txtUS);
-            this.groupBox6.Controls.Add(this.label18);
-            this.groupBox6.Location = new System.Drawing.Point(59, 57);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(300, 320);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.Color.LightPink;
-            this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(59, 35);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(212, 19);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "THÔNG TIN KHÁCH HÀNG";
-            // 
-            // txtUS
-            // 
-            this.txtUS.ForeColor = System.Drawing.Color.Black;
-            this.txtUS.Location = new System.Drawing.Point(87, 89);
-            this.txtUS.Name = "txtUS";
-            this.txtUS.Size = new System.Drawing.Size(177, 23);
-            this.txtUS.TabIndex = 1;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtPassword.Location = new System.Drawing.Point(87, 135);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(177, 23);
-            this.txtPassword.TabIndex = 2;
-            // 
-            // txtPN
-            // 
-            this.txtPN.ForeColor = System.Drawing.Color.Black;
-            this.txtPN.Location = new System.Drawing.Point(87, 187);
-            this.txtPN.Name = "txtPN";
-            this.txtPN.Size = new System.Drawing.Size(177, 23);
-            this.txtPN.TabIndex = 3;
-            // 
-            // txtMail
-            // 
-            this.txtMail.ForeColor = System.Drawing.Color.Black;
-            this.txtMail.Location = new System.Drawing.Point(87, 236);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(177, 23);
-            this.txtMail.TabIndex = 4;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(39, 89);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(32, 27);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 6;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(39, 236);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(32, 27);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 7;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(39, 187);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(32, 27);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 8;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(39, 135);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(32, 27);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 9;
-            this.pictureBox9.TabStop = false;
-            // 
-            // btnLuu
-            // 
-            this.btnLuu.BackColor = System.Drawing.Color.LightPink;
-            this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.ForeColor = System.Drawing.Color.White;
-            this.btnLuu.Location = new System.Drawing.Point(63, 336);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(75, 28);
-            this.btnLuu.TabIndex = 10;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.UseVisualStyleBackColor = false;
-            // 
-            // btnMail
-            // 
-            this.btnMail.BackColor = System.Drawing.Color.LightPink;
-            this.btnMail.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMail.ForeColor = System.Drawing.Color.White;
-            this.btnMail.Location = new System.Drawing.Point(203, 336);
-            this.btnMail.Name = "btnMail";
-            this.btnMail.Size = new System.Drawing.Size(75, 28);
-            this.btnMail.TabIndex = 11;
-            this.btnMail.Text = "Mail";
-            this.btnMail.UseVisualStyleBackColor = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.BackColor = System.Drawing.Color.Crimson;
-            this.groupBox5.Controls.Add(this.groupBox6);
-            this.groupBox5.Location = new System.Drawing.Point(157, 5);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(408, 435);
-            this.groupBox5.TabIndex = 11;
-            this.groupBox5.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -1415,6 +1404,13 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1427,13 +1423,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1480,21 +1469,20 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.Button button39;
-        private System.Windows.Forms.Button button37;
-        private System.Windows.Forms.RadioButton rdbDienTu;
-        private System.Windows.Forms.RadioButton rdbTienMat;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnMua_KH;
+        private System.Windows.Forms.Button btnXoa_KH;
+        private System.Windows.Forms.RadioButton rdbDienTu_KH;
+        private System.Windows.Forms.RadioButton rdbTienMat_KH;
+        private System.Windows.Forms.TextBox txtSoTien_KH;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton rdbIMAX;
-        private System.Windows.Forms.RadioButton rdb3D;
-        private System.Windows.Forms.RadioButton rdb2D;
+        private System.Windows.Forms.RadioButton rdbPhongIMAX_KH;
+        private System.Windows.Forms.RadioButton rdbPhong3D_KH;
+        private System.Windows.Forms.RadioButton rdbPhong2D_KH;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button btnXacNhan_KH;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtGheDaChon;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button36;
