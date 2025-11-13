@@ -17,7 +17,7 @@ namespace BTL_LapTrinhTrucQuan
         private SqlConnection conn;
         private SqlDataAdapter da;
         private DataTable dtPhim;
-        private const string connectionString = "Data Source=DESKTOP-L7HKKMB;Initial Catalog=QLPhimPho;Integrated Security=True";
+        private const string connectionString = "Data Source=DESKTOP-V7DI0T1;Initial Catalog=RAPPHIM;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
@@ -115,6 +115,21 @@ namespace BTL_LapTrinhTrucQuan
             txtTenPhim.Text = string.Empty;
             txtTheLoai.Text = string.Empty;
             txtThoiLuong.Text = string.Empty;
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grbMenu_Enter_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
