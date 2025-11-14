@@ -258,5 +258,8 @@ namespace BTL_LapTrinhTrucQuan
                 MessageBox.Show("Vui lòng chọn phương thức thanh toán (Tiền mặt hoặc Điện tử) trước khi mua vé.");
             }
         }
+
+     
     }
-}
+} //tao hamj ronaldo
+
