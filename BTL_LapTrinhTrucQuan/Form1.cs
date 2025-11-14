@@ -18,53 +18,48 @@ namespace BTL_LapTrinhTrucQuan
         private SqlDataAdapter da;
         private DataTable dtPhim;
         private const string connectionString = "Data Source=DESKTOP-L7HKKMB;Initial Catalog=QLPhimPho;Integrated Security=True";
+        private const int ID_PHONG_CHIEU_HIEN_TAI = 1; // THAY THẾ BẰNG ID PHÒNG CHIẾU HIỆN TẠI (hoặc lấy từ nơi khác)
+        private static readonly Color MAU_GHE_DA_DAT = Color.Red;
         public Form1()
         {
             InitializeComponent();
             LoadDataPhim(); // Gọi hàm tải dữ liệu khi khởi tạo form
             GanSuKienChoTatCaGhe();
+
         }
 
         private void LoadDataPhim()
         {
             // ... (Khởi tạo conn, dtPhim, connectionString như cũ)
 
-            try
-            {
-                conn = new SqlConnection(connectionString);
-                // 1. Chuỗi truy vấn cập nhật (chỉ lấy các cột quan trọng)
-                string query = "SELECT ID_PHIM, TENPHIM, THELOAI, THOILUONG, NGONNGU, DAODIEN, DIENVIEN,TRANGTHAI FROM dbo.PHIM";
-
-                conn.Open();
-                da = new SqlDataAdapter(query, conn);
-                dtPhim = new DataTable();
-
-                // 2. Đổ dữ liệu và gán nguồn
-                da.Fill(dtPhim);
-                dgvDSPhim.DataSource = dtPhim;
-                dgvDSPhim.AllowUserToAddRows = false;
-
-                // 3. Đổi tên tiêu đề cột hiển thị trên DataGridView
-                dgvDSPhim.Columns["ID_PHIM"].HeaderText = "Mã phim";
-                dgvDSPhim.Columns["TENPHIM"].HeaderText = "Tên phim";
-                dgvDSPhim.Columns["THELOAI"].HeaderText = "Thể loại";
-                dgvDSPhim.Columns["THOILUONG"].HeaderText = "Thời lượng";
-                dgvDSPhim.Columns["NGONNGU"].HeaderText = "Ngôn ngữ";
-                dgvDSPhim.Columns["DAODIEN"].HeaderText = "Đạo diễn";
-                dgvDSPhim.Columns["DIENVIEN"].HeaderText = "Diễn viên";
-                dgvDSPhim.Columns["TRANGTHAI"].HeaderText = "Trạng thái";
-            }
 
 
-            finally
-            {
-                // Đảm bảo đóng kết nối sau khi hoàn thành
-                if (conn != null && conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
+            conn = new SqlConnection(connectionString);
+            // 1. Chuỗi truy vấn cập nhật (chỉ lấy các cột quan trọng)
+            string query = "SELECT ID_PHIM, TENPHIM, THELOAI, THOILUONG, NGONNGU, DAODIEN, DIENVIEN,TRANGTHAI FROM dbo.PHIM";
+
+            conn.Open();
+            da = new SqlDataAdapter(query, conn);
+            dtPhim = new DataTable();
+
+            // 2. Đổ dữ liệu và gán nguồn
+            da.Fill(dtPhim);
+            dgvDSPhim.DataSource = dtPhim;
+            dgvDSPhim.AllowUserToAddRows = false;
+
+            // 3. Đổi tên tiêu đề cột hiển thị trên DataGridView
+            dgvDSPhim.Columns["ID_PHIM"].HeaderText = "Mã phim";
+            dgvDSPhim.Columns["TENPHIM"].HeaderText = "Tên phim";
+            dgvDSPhim.Columns["THELOAI"].HeaderText = "Thể loại";
+            dgvDSPhim.Columns["THOILUONG"].HeaderText = "Thời lượng";
+            dgvDSPhim.Columns["NGONNGU"].HeaderText = "Ngôn ngữ";
+            dgvDSPhim.Columns["DAODIEN"].HeaderText = "Đạo diễn";
+            dgvDSPhim.Columns["DIENVIEN"].HeaderText = "Diễn viên";
+            dgvDSPhim.Columns["TRANGTHAI"].HeaderText = "Trạng thái";
+
+
         }
+        
         private void dgvDSPhim_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -72,15 +67,14 @@ namespace BTL_LapTrinhTrucQuan
                 DataGridViewRow row = dgvDSPhim.Rows[e.RowIndex];
 
 
-                txtMaPhim.Text = row.Cells["ID_PHIM"].Value.ToString();
-                txtTenPhim.Text = row.Cells["TENPHIM"].Value.ToString();
-                txtTheLoai.Text = row.Cells["THELOAI"].Value.ToString();
+                txtMaPhim_BDK.Text = row.Cells["ID_PHIM"].Value.ToString();
+                txtTenPhim_BDK.Text = row.Cells["TENPHIM"].Value.ToString();
+                txtTheLoai_BDK.Text = row.Cells["THELOAI"].Value.ToString();
 
                 object thoiLuongValue = row.Cells["THOILUONG"].Value;
-                txtThoiLuong.Text = (thoiLuongValue == DBNull.Value) ? string.Empty : thoiLuongValue.ToString();
+                txtThoiLuong_BDK.Text = (thoiLuongValue == DBNull.Value) ? string.Empty : thoiLuongValue.ToString();
             }
         }
-
 
         private void btnLichSu_Click(object sender, EventArgs e)
         {
@@ -108,13 +102,19 @@ namespace BTL_LapTrinhTrucQuan
             tabControl1.SelectedIndex = 3;
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+       
+
+        
+        private void btnXoa_BDK_Click(object sender, EventArgs e)
         {
-            txtMaPhim.Text = string.Empty;
-            txtTenPhim.Text = string.Empty;
-            txtTheLoai.Text = string.Empty;
-            txtThoiLuong.Text = string.Empty;
+            txtMaPhim_BDK.Text = string.Empty;
+            txtTenPhim_BDK.Text = string.Empty;
+            txtTheLoai_BDK.Text = string.Empty;
+            txtThoiLuong_BDK.Text = string.Empty;
         }
+           
+       
+        
 
         private List<string> danhSachGheDaChon = new List<string>();
         private const int GIA_GHE_MAC_DINH = 60000;
@@ -177,7 +177,7 @@ namespace BTL_LapTrinhTrucQuan
             // 3. Cập nhật và vô hiệu hóa chỉnh sửa cho txtTongTienThanhToan
             txtSoTien_KH.Text = tongTien.ToString("N0") + " VNĐ";
             txtSoTien_KH.ReadOnly = true; // <--- VÔ HIỆU HÓA CHỈNH SỬA
-                                          }
+        }
 
         private void btnXacNhan_KH_Click(object sender, EventArgs e)
         {
@@ -197,7 +197,7 @@ namespace BTL_LapTrinhTrucQuan
 
         private void rdbDienTu_KH_CheckedChanged(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btnXoa_KH_Click(object sender, EventArgs e)
@@ -259,7 +259,14 @@ namespace BTL_LapTrinhTrucQuan
             }
         }
 
-     
+        private void btnDX_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            dangnhap loginForm = new dangnhap();
+            loginForm.ShowDialog();
+            this.Show();
+
+        }
     }
-} //tao hamj ronaldo
+}
 
