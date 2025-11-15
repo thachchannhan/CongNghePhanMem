@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace BTL_LapTrinhTrucQuan
 {
@@ -18,14 +18,19 @@ namespace BTL_LapTrinhTrucQuan
         private SqlDataAdapter da;
         private DataTable dtPhim;
         private const string connectionString = "Data Source=DESKTOP-L7HKKMB;Initial Catalog=QLPhimPho;Integrated Security=True";
-        private const int ID_PHONG_CHIEU_HIEN_TAI = 1; // THAY THẾ BẰNG ID PHÒNG CHIẾU HIỆN TẠI (hoặc lấy từ nơi khác)
-        private static readonly Color MAU_GHE_DA_DAT = Color.Red;
+     
         public Form1()
         {
             InitializeComponent();
             LoadDataPhim(); // Gọi hàm tải dữ liệu khi khởi tạo form
-            GanSuKienChoTatCaGhe();
 
+        }
+        private void LoadStatusFromDatabase()
+        {
+            // Ví dụ: truy vấn DB và cập nhật UI cho 36 ghế
+            // 1. Lấy dữ liệu từ bảng Ghe
+            // 2. Lọc trangThai != 0
+            // 3. Cập nhật danhSachGheObject và btn.BackColor
         }
 
         private void LoadDataPhim()
@@ -112,82 +117,133 @@ namespace BTL_LapTrinhTrucQuan
             txtTheLoai_BDK.Text = string.Empty;
             txtThoiLuong_BDK.Text = string.Empty;
         }
-           
-       
-        
 
-        private List<string> danhSachGheDaChon = new List<string>();
-        private const int GIA_GHE_MAC_DINH = 60000;
-        private void GanSuKienChoTatCaGhe()
+        public class Ghe
         {
-            TabPage tabGhe = tabControl1.TabPages[3];
-            foreach (Control control in tabGhe.Controls)
+            public int GheId { get; set; }      // Khóa chính trong DB
+            public string TenGhe { get; set; } // tham khảo
+            public string Hang { get; set; }
+            public string Cot { get; set; }
+            public int TrangThai { get; set; }  // 1: Trong, 2: DaDat, 0: BoQua
+            public int LoaiGhe { get; set; }    // 1: Thuong, 2: VIP
+            public bool DaChon { get; set; }
+            public bool DaDat { get; set; }
+            public Button Nut { get; set; }      // tham chiếu nút trên UI
+        }
+        Dictionary<string, Ghe> danhSachGheObject;
+
+        void AddGhe()
+        {
+            // Reset để tránh cộng dồn (nếu AddGhe gọi nhiều lần)
+            danhSachGheObject = new Dictionary<string, Ghe>();
+
+            foreach (Control ctrl in panelGhe.Controls)
             {
-                // Kiểm tra xem control đó có phải là Button không
-                if (control is Button btnGhe)
+                if (ctrl is Button btn)
                 {
-                    // Kiểm tra xem Button này có phải là nút ghế thực sự (có tên ghế, vd: A1, B6)
-                    if (btnGhe.Text.Length == 2 && Char.IsLetter(btnGhe.Text[0]) && Char.IsDigit(btnGhe.Text[1]))
+                    string tenGhe = btn.Text;
+
+                    // Tạo hoặc cập nhật đối tượng Ghe
+                    var ghe = new Ghe
                     {
-                        // Gán sự kiện Click cho nút ghế đó vào hàm xử lý chung
-                        btnGhe.Click += new EventHandler(XuLyClickGhe);
+                        TenGhe = tenGhe,
+                        Hang = GetHangFromTen(tenGhe),
+                        Cot = GetCotFromTen(tenGhe),
+                        TrangThai = 1, // mặc định trống; sẽ cập nhật từ DB sau
+                        LoaiGhe = GetLoaiGheFromTen(tenGhe),
+                        DaChon = false,
+                        DaDat = false,
+                        Nut = btn
+                    };
+
+                    danhSachGheObject[tenGhe] = ghe;
+
+                    // Đảm bảo mỗi nút chỉ có một handler
+                    btn.Click -= Ghe_Click;
+                    btn.Click += Ghe_Click;
+
+                    // Lưu tham chiếu Ghe vào Button.Tag (tùy chọn)
+                    btn.Tag = ghe;
+                }
+            }
+
+            // Nạp trạng thái từ DB (nếu có) và cập nhật UI
+            LoadStatusFromDatabase();
+        }
+        
+        private string GetHangFromTen(string ten)
+        {
+            // Ví dụ: ten = "F2" => Hang = "2"
+            // Tuỳ quy ước của bạn có thể điều chỉnh:
+            // Lấy chuỗi chữ số ở cuối
+            var digits = new string(ten.SkipWhile(c => !char.IsDigit(c)).ToArray());
+            return digits;
+        }
+
+        private string GetCotFromTen(string ten)
+        {
+            // Ví dụ: ten = "F2" => Cot = "F" (nút ở cột F)
+            // Lấy phần chữ cái ở đầu
+            var letters = new string(ten.TakeWhile(c => Char.IsLetter(c)).ToArray());
+            return letters;
+        }
+
+        private int GetLoaiGheFromTen(string ten)
+        {
+            // Ví dụ: nếu quy ước TenGhe có chữ cái hoặc số để phân loại
+            // Ở đây trả về 1 (Thường) làm mặc định
+            // Bạn có thể điều chỉnh dựa trên quy ước của bạn
+            return 1;
+        }
+        private async void Ghe_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                // Lấy Ghe từ Tag (nếu có)
+                if (btn.Tag is Ghe ghe)
+                {
+                    if (ghe.TrangThai == 1) // ghế còn trống
+                    {
+                        // Toggle chọn
+                        ghe.DaChon = !ghe.DaChon;
+                        ghe.TrangThai = ghe.DaChon ? 2 : 1;
+
+                        // Cập nhật UI
+                        btn.BackColor = ghe.DaChon ? Color.LightBlue : Color.LightYellow;
+
+                        // Lưu DB (nếu có logic lưu)
+                        await LuuGheVaoDatabase(ghe);
+                    }
+                    else
+                    {
+                        // Ghế đã đặt
+                        MessageBox.Show("Ghế đã đặt!");
                     }
                 }
             }
         }
-        private static readonly Color MAU_GHE_DA_CHON = Color.LightBlue;
-        private static readonly Color MAU_GHE_CHUA_CHON = Color.LightYellow;
-        private void XuLyClickGhe(object sender, EventArgs e)
+        private async Task LuuGheVaoDatabase(Ghe ghe)
         {
-            // Biến sender chính là nút (Button) vừa được click
+            // Cập nhật trạng thái theo GheId
+            string query = "UPDATE Ghe SET TrangThai = @TrangThai WHERE GheId = @GheId";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(query, conn))
             {
-                Button btnGhe = (Button)sender;
-                string tenGhe = btnGhe.Text;
+                cmd.Parameters.AddWithValue("@TrangThai", ghe.TrangThai);
+                cmd.Parameters.AddWithValue("@GheId", ghe.GheId);
 
-                // Logic chọn/hủy chọn ghế
-                if (danhSachGheDaChon.Contains(tenGhe))
-                {
-                    // 1. Nếu ghế đã chọn -> Hủy chọn
-                    // ĐẶT LẠI MÀU VÀNG BAN ĐẦU
-                    btnGhe.BackColor = MAU_GHE_CHUA_CHON;
-                    danhSachGheDaChon.Remove(tenGhe);
-                }
-                else
-                {
-                    // 2. Nếu ghế chưa chọn -> Chọn ghế
-                    // ĐẶT MÀU XANH KHI ĐƯỢC CHỌN
-                    btnGhe.BackColor = MAU_GHE_DA_CHON;
-                    danhSachGheDaChon.Add(tenGhe);
-                }
-
-                CapNhatThongTinThanhToan();
+                await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
             }
         }
-        private void CapNhatThongTinThanhToan()
-        {
-            txtGheDaChon.Text = string.Join(", ", danhSachGheDaChon);
-
-            int tongSoGhe = danhSachGheDaChon.Count;
-            long tongTien = (long)tongSoGhe * GIA_GHE_MAC_DINH;
-
-
-            txtGheDaChon.Text = string.Join(", ", danhSachGheDaChon);
-            txtGheDaChon.ReadOnly = true; // <--- VÔ HIỆU HÓA CHỈNH SỬA
-
-            // 3. Cập nhật và vô hiệu hóa chỉnh sửa cho txtTongTienThanhToan
-            txtSoTien_KH.Text = tongTien.ToString("N0") + " VNĐ";
-            txtSoTien_KH.ReadOnly = true; // <--- VÔ HIỆU HÓA CHỈNH SỬA
-        }
-
         private void btnXacNhan_KH_Click(object sender, EventArgs e)
         {
             if (rdbPhong2D_KH.Checked || rdbPhong3D_KH.Checked || rdbPhongIMAX_KH.Checked)
             {
                 MessageBox.Show("Đã xác nhận phòng.", "Xác nhận", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Sau khi xác nhận, bạn có thể vô hiệu hóa các lựa chọn phòng để tránh thay đổi
-                // rdbPhong2D.Enabled = false;
-                // ...
+             
             }
             else
             {
@@ -202,8 +258,7 @@ namespace BTL_LapTrinhTrucQuan
 
         private void btnXoa_KH_Click(object sender, EventArgs e)
         {
-            danhSachGheDaChon.Clear();
-            CapNhatThongTinThanhToan();
+           
 
             rdbPhong2D_KH.Checked = false;
             rdbPhong3D_KH.Checked = false;
@@ -220,7 +275,6 @@ namespace BTL_LapTrinhTrucQuan
                     if (btnGhe.Text.Length == 2 && Char.IsLetter(btnGhe.Text[0]) && Char.IsDigit(btnGhe.Text[1]))
                     {
                         // Đặt lại màu nền về màu mặc định (ví dụ: Control hoặc LightGray)
-                        btnGhe.BackColor = MAU_GHE_CHUA_CHON; // <--- SỬ DỤNG MÀU VÀNG                    }
                     }
                 }
             }
@@ -267,6 +321,8 @@ namespace BTL_LapTrinhTrucQuan
             this.Show();
 
         }
+
+
     }
 }
 
