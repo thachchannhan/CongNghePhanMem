@@ -21,7 +21,7 @@ namespace BTL_LapTrinhTrucQuan
 
             if (login.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new Form1());
+                Application.Run(new FORMKHACHHANG());
             }
         }
     }

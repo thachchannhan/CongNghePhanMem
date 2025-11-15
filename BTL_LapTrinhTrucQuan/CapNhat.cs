@@ -16,5 +16,7 @@ namespace BTL_LapTrinhTrucQuan
         {
             InitializeComponent();
         }
+
+
     }
 }

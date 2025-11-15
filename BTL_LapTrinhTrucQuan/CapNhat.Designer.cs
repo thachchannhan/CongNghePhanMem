@@ -47,10 +47,10 @@
             // 
             this.btnThoatcn.BackColor = System.Drawing.Color.White;
             this.btnThoatcn.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoatcn.Location = new System.Drawing.Point(220, 371);
-            this.btnThoatcn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnThoatcn.Location = new System.Drawing.Point(250, 396);
+            this.btnThoatcn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnThoatcn.Name = "btnThoatcn";
-            this.btnThoatcn.Size = new System.Drawing.Size(112, 35);
+            this.btnThoatcn.Size = new System.Drawing.Size(149, 43);
             this.btnThoatcn.TabIndex = 38;
             this.btnThoatcn.Text = "Thoát";
             this.btnThoatcn.UseVisualStyleBackColor = false;
@@ -60,93 +60,98 @@
             this.btnCapNhat.BackColor = System.Drawing.Color.White;
             this.btnCapNhat.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCapNhat.ForeColor = System.Drawing.Color.Black;
-            this.btnCapNhat.Location = new System.Drawing.Point(44, 371);
-            this.btnCapNhat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCapNhat.Location = new System.Drawing.Point(46, 396);
+            this.btnCapNhat.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnCapNhat.Name = "btnCapNhat";
-            this.btnCapNhat.Size = new System.Drawing.Size(112, 35);
+            this.btnCapNhat.Size = new System.Drawing.Size(149, 43);
             this.btnCapNhat.TabIndex = 37;
             this.btnCapNhat.Text = "Cập nhật";
             this.btnCapNhat.UseVisualStyleBackColor = false;
             // 
             // txtPasswordcn
             // 
-            this.txtPasswordcn.Location = new System.Drawing.Point(148, 305);
-            this.txtPasswordcn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtPasswordcn.Location = new System.Drawing.Point(186, 316);
+            this.txtPasswordcn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtPasswordcn.Name = "txtPasswordcn";
-            this.txtPasswordcn.Size = new System.Drawing.Size(148, 20);
+            this.txtPasswordcn.Size = new System.Drawing.Size(196, 22);
             this.txtPasswordcn.TabIndex = 36;
             // 
             // txtTencn
             // 
-            this.txtTencn.Location = new System.Drawing.Point(148, 188);
-            this.txtTencn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTencn.Location = new System.Drawing.Point(186, 196);
+            this.txtTencn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtTencn.Name = "txtTencn";
-            this.txtTencn.Size = new System.Drawing.Size(148, 20);
+            this.txtTencn.Size = new System.Drawing.Size(196, 22);
             this.txtTencn.TabIndex = 35;
             // 
             // txtSDTcn
             // 
-            this.txtSDTcn.Location = new System.Drawing.Point(148, 245);
-            this.txtSDTcn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSDTcn.Location = new System.Drawing.Point(186, 248);
+            this.txtSDTcn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtSDTcn.Name = "txtSDTcn";
-            this.txtSDTcn.Size = new System.Drawing.Size(148, 20);
+            this.txtSDTcn.Size = new System.Drawing.Size(196, 22);
             this.txtSDTcn.TabIndex = 34;
             // 
             // txtMaKHcn
             // 
-            this.txtMaKHcn.Location = new System.Drawing.Point(148, 72);
-            this.txtMaKHcn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtMaKHcn.Location = new System.Drawing.Point(184, 96);
+            this.txtMaKHcn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtMaKHcn.Name = "txtMaKHcn";
-            this.txtMaKHcn.Size = new System.Drawing.Size(148, 20);
+            this.txtMaKHcn.Size = new System.Drawing.Size(196, 22);
             this.txtMaKHcn.TabIndex = 32;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 198);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(61, 196);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(56, 20);
             this.label6.TabIndex = 31;
             this.label6.Text = "Email:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 308);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(61, 318);
+            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.Size = new System.Drawing.Size(88, 20);
             this.label5.TabIndex = 30;
             this.label5.Text = "Password:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 257);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(61, 250);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(47, 20);
             this.label4.TabIndex = 29;
             this.label4.Text = "SĐT:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 138);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(61, 145);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 28;
             this.label3.Text = "Giới tính";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 79);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(61, 97);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 27;
             this.label2.Text = "Họ và tên";
             // 
@@ -155,10 +160,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(71, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(109, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 19);
+            this.label1.Size = new System.Drawing.Size(262, 23);
             this.label1.TabIndex = 26;
             this.label1.Text = "THÔNG   TIN   TÀI   KHOẢN";
             // 
@@ -174,16 +179,18 @@
             "Bisexual",
             "Asexual",
             "Súc vật"});
-            this.comboBox1.Location = new System.Drawing.Point(148, 129);
+            this.comboBox1.Location = new System.Drawing.Point(184, 145);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(148, 21);
+            this.comboBox1.Size = new System.Drawing.Size(196, 24);
             this.comboBox1.TabIndex = 39;
             // 
             // CapNhat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 411);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(453, 481);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnThoatcn);
             this.Controls.Add(this.btnCapNhat);
@@ -197,6 +204,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CapNhat";
             this.Text = "CapNhat";
             this.ResumeLayout(false);

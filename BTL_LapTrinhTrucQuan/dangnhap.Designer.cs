@@ -47,10 +47,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(39, 79);
+            this.pictureBox1.Location = new System.Drawing.Point(-4, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(194, 250);
+            this.pictureBox1.Size = new System.Drawing.Size(325, 331);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
@@ -64,10 +64,10 @@
             this.panel2.Controls.Add(this.txtPassword);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(280, 105);
+            this.panel2.Location = new System.Drawing.Point(319, 72);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(428, 302);
+            this.panel2.Size = new System.Drawing.Size(350, 259);
             this.panel2.TabIndex = 11;
             // 
             // btnThoat_DN
@@ -75,10 +75,10 @@
             this.btnThoat_DN.BackColor = System.Drawing.Color.Crimson;
             this.btnThoat_DN.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat_DN.ForeColor = System.Drawing.Color.White;
-            this.btnThoat_DN.Location = new System.Drawing.Point(268, 241);
+            this.btnThoat_DN.Location = new System.Drawing.Point(178, 198);
             this.btnThoat_DN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnThoat_DN.Name = "btnThoat_DN";
-            this.btnThoat_DN.Size = new System.Drawing.Size(145, 41);
+            this.btnThoat_DN.Size = new System.Drawing.Size(96, 41);
             this.btnThoat_DN.TabIndex = 7;
             this.btnThoat_DN.Text = "Thoát";
             this.btnThoat_DN.UseVisualStyleBackColor = false;
@@ -86,10 +86,10 @@
             // 
             // txtTenDN
             // 
-            this.txtTenDN.Location = new System.Drawing.Point(38, 72);
+            this.txtTenDN.Location = new System.Drawing.Point(59, 61);
             this.txtTenDN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTenDN.Name = "txtTenDN";
-            this.txtTenDN.Size = new System.Drawing.Size(302, 20);
+            this.txtTenDN.Size = new System.Drawing.Size(215, 20);
             this.txtTenDN.TabIndex = 2;
             // 
             // btnDangnhap
@@ -97,10 +97,10 @@
             this.btnDangnhap.BackColor = System.Drawing.Color.LightSeaGreen;
             this.btnDangnhap.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangnhap.ForeColor = System.Drawing.Color.White;
-            this.btnDangnhap.Location = new System.Drawing.Point(38, 241);
+            this.btnDangnhap.Location = new System.Drawing.Point(59, 198);
             this.btnDangnhap.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDangnhap.Name = "btnDangnhap";
-            this.btnDangnhap.Size = new System.Drawing.Size(146, 41);
+            this.btnDangnhap.Size = new System.Drawing.Size(94, 41);
             this.btnDangnhap.TabIndex = 6;
             this.btnDangnhap.Text = "Đăng nhập";
             this.btnDangnhap.UseVisualStyleBackColor = false;
@@ -108,17 +108,17 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(38, 164);
+            this.txtPassword.Location = new System.Drawing.Point(59, 153);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(302, 20);
+            this.txtPassword.Size = new System.Drawing.Size(215, 20);
             this.txtPassword.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 125);
+            this.label3.Location = new System.Drawing.Point(56, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 5;
@@ -128,7 +128,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 34);
+            this.label2.Location = new System.Drawing.Point(56, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 17);
             this.label2.TabIndex = 4;
@@ -138,10 +138,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGreen;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(280, 29);
+            this.panel1.Location = new System.Drawing.Point(319, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(428, 73);
+            this.panel1.Size = new System.Drawing.Size(350, 76);
             this.panel1.TabIndex = 10;
             // 
             // label1
@@ -149,7 +149,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(14, 22);
+            this.label1.Location = new System.Drawing.Point(34, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(291, 22);
             this.label1.TabIndex = 0;
@@ -159,13 +159,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(671, 334);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "dangnhap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "dangnhap";
-            this.Load += new System.EventHandler(this.dangnhap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
