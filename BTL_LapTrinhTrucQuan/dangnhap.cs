@@ -40,12 +40,14 @@ namespace BTL_LapTrinhTrucQuan
                 return;
             }
 
-            // ⭐ TRUY VẤN MỚI để lấy nhiều cột
             string query = $@"
         SELECT 
             tk.ID_TAIKHOAN, 
             tk.TENDANGNHAP,
             tk.EMAIL,
+            tk.GIOITINH,
+            tk.NGAYSINH,
+            tk.SDT,
             q.VAITRO
         FROM TAIKHOAN tk
         JOIN QUYEN_TRUYCAP q ON tk.ID_TAIKHOAN = q.ID_TAIKHOAN
@@ -57,11 +59,27 @@ namespace BTL_LapTrinhTrucQuan
             {
                 DataRow row = dtResult.Rows[0];
 
-                // ⭐ LƯU THÔNG TIN VÀO USER SESSION
+                // LƯU THÔNG TIN VÀO USER SESSION
                 TaiKhoan.ID = row["ID_TAIKHOAN"].ToString();
                 TaiKhoan.Quyen = row["VAITRO"].ToString();
-                TaiKhoan.Name = row["TENDANGNHAP"].ToString(); // Dùng TENDANGNHAP làm Tên hiển thị
-                TaiKhoan.Email = row["EMAIL"].ToString();
+                TaiKhoan.Name = row["TENDANGNHAP"].ToString(); // Name vừa là tên đăng nhập vừa là họ tên
+                TaiKhoan.Email = row["EMAIL"] != DBNull.Value ? row["EMAIL"].ToString() : "";
+
+                // THÔNG TIN CÁ NHÂN
+                TaiKhoan.GioiTinh = row["GIOITINH"] != DBNull.Value ? row["GIOITINH"].ToString() : "";
+
+                // Xử lý ngày sinh
+                if (row["NGAYSINH"] != DBNull.Value)
+                {
+                    DateTime ngaySinh = Convert.ToDateTime(row["NGAYSINH"]);
+                    TaiKhoan.NgaySinh = ngaySinh.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    TaiKhoan.NgaySinh = "";
+                }
+
+                TaiKhoan.SoDienThoai = row["SDT"] != DBNull.Value ? row["SDT"].ToString() : "";
 
                 // Đăng nhập thành công
                 this.DialogResult = DialogResult.OK;
@@ -72,7 +90,6 @@ namespace BTL_LapTrinhTrucQuan
                 MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
             }
         }
-
         private void btnThoat_DN_Click(object sender, EventArgs e)
         {
             Application.Exit();

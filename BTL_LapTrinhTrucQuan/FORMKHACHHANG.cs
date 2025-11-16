@@ -24,6 +24,7 @@ namespace BTL_LapTrinhTrucQuan
             //Lichsu
             HienThiTenNguoiDung();
             LoadDataHoaDon();
+            //Muave
             HienThiTongChiTieu();
             GanSuKienChoGhe();
             btnChonPhim.Click += btnChonPhim_Click;
@@ -31,6 +32,9 @@ namespace BTL_LapTrinhTrucQuan
             btnXoa_KH.Click += btnXoa_KH_Click;
             btnMua_KH.Click += btnMua_KH_Click;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            //CaNhan
+            button40.Click += btnCapNhat_Click;
+            LoadThongTinCaNhan();
         }
         private void btnBDK_Click(object sender, EventArgs e)
         {
@@ -168,28 +172,7 @@ namespace BTL_LapTrinhTrucQuan
         }
 
         //TABPAGE LICHSU
-        private void HienThiTenNguoiDung()
-        {
-            string tenHienThi = TaiKhoan.Name;
-            string Email = TaiKhoan.Email;
-
-            if (!string.IsNullOrEmpty(tenHienThi))
-            {
-                txtTenKH_LS.Text = tenHienThi;
-                txtEmail_LS.Text = Email;
-
-            }
-            else
-            {
-                txtTenKH_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
-                txtEmail_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
-            }
-            txtTenKH_LS.SelectionStart = 0;
-            txtTenKH_LS.SelectionLength = 0;
-
-            txtEmail_LS.SelectionStart = 0;
-            txtEmail_LS.SelectionLength = 0;
-        }
+        
         private void LoadDataHoaDon() // Đổi tên từ LoadDataVe
         {
             string userID = TaiKhoan.ID;
@@ -732,6 +715,144 @@ namespace BTL_LapTrinhTrucQuan
         private void btnXoa_KH_Click(object sender, EventArgs e)
         {
             XoaTatCaGheDaChon();
+        }
+
+
+        //CẬP NHẬT THÔNG TIN CÁ NHÂN
+        private void LoadThongTinCaNhan()
+        {
+            try
+            {
+                // Hiển thị thông tin từ session
+                textBox3.Text = TaiKhoan.Name ?? ""; // Name vừa là tên đăng nhập vừa là họ tên
+                textBox7.Text = TaiKhoan.GioiTinh ?? "";
+                textBox6.Text = TaiKhoan.SoDienThoai ?? "";
+                textBox4.Text = TaiKhoan.NgaySinh ?? "";
+                textBox5.Text = TaiKhoan.Email ?? "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải thông tin cá nhân: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Sự kiện khi click nút Cập nhật
+        // Sự kiện khi click nút Cập nhật
+        private void btnCapNhat_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lấy thông tin từ các textbox
+                string name = textBox3.Text.Trim(); // Name vừa là tên đăng nhập vừa là họ tên
+                string gioiTinh = textBox7.Text.Trim();
+                string soDienThoai = textBox6.Text.Trim();
+                string ngaySinh = textBox4.Text.Trim();
+                string email = textBox5.Text.Trim();
+
+                // Validation cơ bản
+                if (string.IsNullOrEmpty(name))
+                {
+                    MessageBox.Show("Vui lòng nhập họ và tên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox3.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(email))
+                {
+                    MessageBox.Show("Vui lòng nhập email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox5.Focus();
+                    return;
+                }
+
+                // Xử lý ký tự đặc biệt để tránh SQL Injection
+                name = name.Replace("'", "''");
+                gioiTinh = gioiTinh.Replace("'", "''");
+                soDienThoai = soDienThoai.Replace("'", "''");
+                email = email.Replace("'", "''");
+
+                // Xử lý ngày sinh
+                string ngaySinhSQL = "NULL";
+                if (!string.IsNullOrEmpty(ngaySinh))
+                {
+                    if (DateTime.TryParse(ngaySinh, out DateTime parsedDate))
+                    {
+                        ngaySinhSQL = $"'{parsedDate:yyyy-MM-dd}'";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Định dạng ngày sinh không hợp lệ! Vui lòng nhập theo định dạng yyyy-MM-dd", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        textBox4.Focus();
+                        return;
+                    }
+                }
+
+                // Cập nhật vào database - CẬP NHẬT TENDANGNHAP (Name)
+                KETNOISQL ketNoi = new KETNOISQL();
+
+                // KIỂM TRA ID TÀI KHOẢN TRƯỚC KHI UPDATE
+                if (string.IsNullOrEmpty(TaiKhoan.ID))
+                {
+                    MessageBox.Show("Lỗi: Không tìm thấy ID tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string query = $@"
+            UPDATE TAIKHOAN 
+            SET TENDANGNHAP = N'{name}',
+                GIOITINH = N'{gioiTinh}',
+                SDT = N'{soDienThoai}',
+                NGAYSINH = {ngaySinhSQL},
+                EMAIL = N'{email}'
+            WHERE ID_TAIKHOAN = '{TaiKhoan.ID}'"; // THÊM DẤU NHÁY QUANH ID
+
+                int result = ketNoi.ExecuteNonQuery(query);
+
+                if (result > 0)
+                {
+                    // Cập nhật thông tin trong session
+                    TaiKhoan.Name = name;
+                    TaiKhoan.GioiTinh = gioiTinh;
+                    TaiKhoan.SoDienThoai = soDienThoai;
+                    TaiKhoan.NgaySinh = ngaySinh;
+                    TaiKhoan.Email = email;
+
+                    MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Cập nhật lại thông tin ở tab Lịch sử
+                    HienThiTenNguoiDung();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thông tin thất bại! Có thể ID tài khoản không tồn tại hoặc có lỗi xảy ra.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật thông tin: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Cập nhật phương thức HienThiTenNguoiDung để hiển thị tên thật thay vì tên đăng nhập
+        private void HienThiTenNguoiDung()
+        {
+            string tenHienThi = TaiKhoan.Name ?? "";
+            string email = TaiKhoan.Email ?? "";
+
+            if (!string.IsNullOrEmpty(tenHienThi))
+            {
+                txtTenKH_LS.Text = tenHienThi;
+                txtEmail_LS.Text = email;
+            }
+            else
+            {
+                txtTenKH_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
+                txtEmail_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
+            }
+
+            txtTenKH_LS.SelectionStart = 0;
+            txtTenKH_LS.SelectionLength = 0;
+            txtEmail_LS.SelectionStart = 0;
+            txtEmail_LS.SelectionLength = 0;
         }
     }
 
