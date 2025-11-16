@@ -40,10 +40,12 @@ namespace BTL_LapTrinhTrucQuan
                 return;
             }
 
+            // CẬP NHẬT QUERY - THÊM TRUY VẤN CỘT HOTEN
             string query = $@"
         SELECT 
             tk.ID_TAIKHOAN, 
             tk.TENDANGNHAP,
+            tk.HOTEN, -- THÊM CỘT HỌ TÊN
             tk.EMAIL,
             tk.GIOITINH,
             tk.NGAYSINH,
@@ -59,10 +61,11 @@ namespace BTL_LapTrinhTrucQuan
             {
                 DataRow row = dtResult.Rows[0];
 
-                // LƯU THÔNG TIN VÀO USER SESSION
+                // LƯU THÔNG TIN VÀO USER SESSION - PHÂN BIỆT TENDANGNHAP VÀ HOTEN
                 TaiKhoan.ID = row["ID_TAIKHOAN"].ToString();
                 TaiKhoan.Quyen = row["VAITRO"].ToString();
-                TaiKhoan.Name = row["TENDANGNHAP"].ToString(); // Name vừa là tên đăng nhập vừa là họ tên
+                TaiKhoan.TenDangNhap = row["TENDANGNHAP"].ToString(); // Tên đăng nhập
+                TaiKhoan.HoTen = row["HOTEN"] != DBNull.Value ? row["HOTEN"].ToString() : ""; // Họ tên thật
                 TaiKhoan.Email = row["EMAIL"] != DBNull.Value ? row["EMAIL"].ToString() : "";
 
                 // THÔNG TIN CÁ NHÂN

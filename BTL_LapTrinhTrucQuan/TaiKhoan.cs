@@ -10,7 +10,8 @@ namespace BTL_LapTrinhTrucQuan
     {
         public static string ID { get; set; }
         public static string Quyen { get; set; }
-        public static string Name { get; set; } // Vừa là tên đăng nhập, vừa là họ tên hiển thị
+        public static string TenDangNhap { get; set; } // Tên đăng nhập
+        public static string HoTen { get; set; } // Họ tên thật
         public static string Email { get; set; }
 
         // THÔNG TIN CÁ NHÂN
@@ -21,7 +22,8 @@ namespace BTL_LapTrinhTrucQuan
         public static void ClearSession()
         {
             ID = null;
-            Name = null;
+            TenDangNhap = null;
+            HoTen = null;
             Quyen = null;
             Email = null;
             GioiTinh = null;

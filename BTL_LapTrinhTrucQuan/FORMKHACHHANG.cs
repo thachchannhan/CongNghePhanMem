@@ -19,6 +19,8 @@ namespace BTL_LapTrinhTrucQuan
             InitializeComponent();
             btnXoa_BDK.Enabled = false;
             btnChonPhim.Enabled = false;
+            txtGheDaChon.ReadOnly = true;
+            txtSoTien_KH.ReadOnly = true;
             //BDK
             LoadDataPHIM();
             //Lichsu
@@ -28,7 +30,6 @@ namespace BTL_LapTrinhTrucQuan
             HienThiTongChiTieu();
             GanSuKienChoGhe();
             btnChonPhim.Click += btnChonPhim_Click;
-            btnXacNhan_KH.Click += btnXacNhan_KH_Click;
             btnXoa_KH.Click += btnXoa_KH_Click;
             btnMua_KH.Click += btnMua_KH_Click;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -687,6 +688,46 @@ namespace BTL_LapTrinhTrucQuan
         // Phương thức xóa tất cả ghế đã chọn
         private void XoaTatCaGheDaChon()
         {
+            // Reset màu sắc của tất cả các ghế đã chọn về trạng thái ban đầu
+            foreach (string tenGhe in danhSachGheDaChon)
+            {
+                // Tìm button ghế tương ứng trong panel
+                foreach (Control control in panelGhe.Controls)
+                {
+                    if (control is Button btn && btn.Text == tenGhe && btn.Enabled)
+                    {
+                        // Xác định lại loại ghế và đặt màu phù hợp
+                        string hang = tenGhe.Substring(0, 1);
+                        string cot = tenGhe.Substring(1);
+
+                        KETNOISQL ketNoi = new KETNOISQL();
+                        string query = $@"
+                    SELECT lg.TENLOAI
+                    FROM GHE g
+                    JOIN LOAIGHE lg ON g.ID_LOAIGHE = lg.ID_LOAIGHE
+                    WHERE g.HANG = '{hang}' AND g.COT = {cot} 
+                    AND g.ID_LOAIPHONG = {selectedLoaiPhongId}";
+
+                        try
+                        {
+                            DataTable dtGhe = ketNoi.GetData(query);
+                            if (dtGhe.Rows.Count > 0)
+                            {
+                                string loaiGhe = dtGhe.Rows[0]["TENLOAI"].ToString();
+                                btn.BackColor = (loaiGhe == "VIP") ? Color.Gold : Color.LightYellow;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Nếu có lỗi, đặt màu mặc định
+                            btn.BackColor = Color.LightYellow;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // Xóa danh sách ghế đã chọn
             danhSachGheDaChon.Clear();
             danhSachGheIdDaChon.Clear();
             CapNhatGheDaChon();
@@ -723,12 +764,13 @@ namespace BTL_LapTrinhTrucQuan
         {
             try
             {
-                // Hiển thị thông tin từ session
-                textBox3.Text = TaiKhoan.Name ?? ""; // Name vừa là tên đăng nhập vừa là họ tên
+                // Hiển thị thông tin từ session - SỬ DỤNG HOTEN THAY VÌ TENDANGNHAP
+                textBox3.Text = TaiKhoan.HoTen ?? ""; // Họ tên thật
                 textBox7.Text = TaiKhoan.GioiTinh ?? "";
                 textBox6.Text = TaiKhoan.SoDienThoai ?? "";
                 textBox4.Text = TaiKhoan.NgaySinh ?? "";
                 textBox5.Text = TaiKhoan.Email ?? "";
+                textBox3.SelectionStart = textBox3.Text.Length;
             }
             catch (Exception ex)
             {
@@ -743,14 +785,14 @@ namespace BTL_LapTrinhTrucQuan
             try
             {
                 // Lấy thông tin từ các textbox
-                string name = textBox3.Text.Trim(); // Name vừa là tên đăng nhập vừa là họ tên
+                string hoTen = textBox3.Text.Trim(); // Họ tên thật
                 string gioiTinh = textBox7.Text.Trim();
                 string soDienThoai = textBox6.Text.Trim();
                 string ngaySinh = textBox4.Text.Trim();
                 string email = textBox5.Text.Trim();
 
                 // Validation cơ bản
-                if (string.IsNullOrEmpty(name))
+                if (string.IsNullOrEmpty(hoTen))
                 {
                     MessageBox.Show("Vui lòng nhập họ và tên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     textBox3.Focus();
@@ -765,7 +807,7 @@ namespace BTL_LapTrinhTrucQuan
                 }
 
                 // Xử lý ký tự đặc biệt để tránh SQL Injection
-                name = name.Replace("'", "''");
+                hoTen = hoTen.Replace("'", "''");
                 gioiTinh = gioiTinh.Replace("'", "''");
                 soDienThoai = soDienThoai.Replace("'", "''");
                 email = email.Replace("'", "''");
@@ -786,7 +828,7 @@ namespace BTL_LapTrinhTrucQuan
                     }
                 }
 
-                // Cập nhật vào database - CẬP NHẬT TENDANGNHAP (Name)
+                // Cập nhật vào database - CẬP NHẬT HOTEN THAY VÌ TENDANGNHAP
                 KETNOISQL ketNoi = new KETNOISQL();
 
                 // KIỂM TRA ID TÀI KHOẢN TRƯỚC KHI UPDATE
@@ -798,19 +840,19 @@ namespace BTL_LapTrinhTrucQuan
 
                 string query = $@"
             UPDATE TAIKHOAN 
-            SET TENDANGNHAP = N'{name}',
+            SET HOTEN = N'{hoTen}', -- CẬP NHẬT HỌ TÊN THẬT
                 GIOITINH = N'{gioiTinh}',
                 SDT = N'{soDienThoai}',
                 NGAYSINH = {ngaySinhSQL},
                 EMAIL = N'{email}'
-            WHERE ID_TAIKHOAN = '{TaiKhoan.ID}'"; // THÊM DẤU NHÁY QUANH ID
+            WHERE ID_TAIKHOAN = '{TaiKhoan.ID}'";
 
                 int result = ketNoi.ExecuteNonQuery(query);
 
                 if (result > 0)
                 {
                     // Cập nhật thông tin trong session
-                    TaiKhoan.Name = name;
+                    TaiKhoan.HoTen = hoTen; // Cập nhật họ tên thật
                     TaiKhoan.GioiTinh = gioiTinh;
                     TaiKhoan.SoDienThoai = soDienThoai;
                     TaiKhoan.NgaySinh = ngaySinh;
@@ -833,27 +875,31 @@ namespace BTL_LapTrinhTrucQuan
         }
 
         // Cập nhật phương thức HienThiTenNguoiDung để hiển thị tên thật thay vì tên đăng nhập
+        // Cập nhật phương thức HienThiTenNguoiDung để hiển thị họ tên thật
         private void HienThiTenNguoiDung()
         {
-            string tenHienThi = TaiKhoan.Name ?? "";
+            string hoTen = TaiKhoan.HoTen ?? "";
             string email = TaiKhoan.Email ?? "";
 
-            if (!string.IsNullOrEmpty(tenHienThi))
+            if (!string.IsNullOrEmpty(hoTen))
             {
-                txtTenKH_LS.Text = tenHienThi;
+                txtTenKH_LS.Text = hoTen;
                 txtEmail_LS.Text = email;
             }
             else
             {
-                txtTenKH_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
-                txtEmail_LS.Text = "Lỗi: Không tìm thấy thông tin người dùng.";
+                // Fallback: nếu không có họ tên thì hiển thị tên đăng nhập
+                txtTenKH_LS.Text = TaiKhoan.TenDangNhap ?? "Lỗi: Không tìm thấy thông tin người dùng.";
+                txtEmail_LS.Text = email;
             }
-
+            txtTenKH_LS.SelectionStart = txtTenKH_LS.Text.Length;
+           
             txtTenKH_LS.SelectionStart = 0;
             txtTenKH_LS.SelectionLength = 0;
             txtEmail_LS.SelectionStart = 0;
             txtEmail_LS.SelectionLength = 0;
         }
+
     }
 
 
