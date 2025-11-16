@@ -16,29 +16,41 @@ namespace BTL_LapTrinhTrucQuan
         {
             InitializeComponent();
         }
+
         public void LoadThongTin(long soTien)
         {
             // Hiển thị tổng tiền lên TextBox trong Form ThanhToan
             txtTongTien_ThanhToan.Text = soTien.ToString("N0") + " VNĐ";
-
-            // Nếu bạn muốn tạo mã QR (như trong ảnh 2), bạn sẽ dùng soTien để tạo mã QR tại đây
-            // (Đây là logic phức tạp hơn, cần thư viện như QRCoder)
-            // string dataQRCode = $"TongTien={soTien}";
-            // ... (Code tạo và hiển thị mã QR)
         }
 
-        // Xử lý nút "Quay về" (Đóng Form này)
-        private void btnQuayVe_ThanhToan_Click(object sender, EventArgs e)
+        // Xử lý nút "Thanh toán" - Giả lập thanh toán thành công
+        private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(comboBox1.Text))
+            {
+                MessageBox.Show("Vui lòng chọn ngân hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Giả lập thanh toán thành công
+            MessageBox.Show($"Thanh toán qua {comboBox1.Text} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Đóng form và trả về kết quả OK
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+        // Xử lý nút "Quay về" - Đóng form và quay về
+        private void btnQuayVe_ThanhToan_Click(object sender, EventArgs e)
+        {
+            // Đóng form và trả về kết quả Cancel
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
 
         private void ThanhToan_Load(object sender, EventArgs e)
         {
-
+            // Có thể thêm các thiết lập khởi tạo khác nếu cần
         }
-
-      
     }
 }

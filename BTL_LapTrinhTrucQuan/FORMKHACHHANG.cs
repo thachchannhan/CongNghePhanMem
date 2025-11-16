@@ -23,8 +23,14 @@ namespace BTL_LapTrinhTrucQuan
             LoadDataPHIM();
             //Lichsu
             HienThiTenNguoiDung();
-            LoadDataVe();
+            LoadDataHoaDon();
             HienThiTongChiTieu();
+            GanSuKienChoGhe();
+            btnChonPhim.Click += btnChonPhim_Click;
+            btnXacNhan_KH.Click += btnXacNhan_KH_Click;
+            btnXoa_KH.Click += btnXoa_KH_Click;
+            btnMua_KH.Click += btnMua_KH_Click;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
         private void btnBDK_Click(object sender, EventArgs e)
         {
@@ -184,7 +190,7 @@ namespace BTL_LapTrinhTrucQuan
             txtEmail_LS.SelectionStart = 0;
             txtEmail_LS.SelectionLength = 0;
         }
-        private void LoadDataVe()
+        private void LoadDataHoaDon() // Đổi tên từ LoadDataVe
         {
             string userID = TaiKhoan.ID;
             if (string.IsNullOrEmpty(userID))
@@ -193,21 +199,23 @@ namespace BTL_LapTrinhTrucQuan
                 return;
             }
             KETNOISQL ketNoi = new KETNOISQL();
+            // Thay đổi truy vấn để lấy dữ liệu từ bảng HOADON
             string query = $@"
-            SELECT 
-            v.ID_VE, 
-            v.ID_CACCHIEU, 
-            v.ID_GHE, 
-            v.GIA,
-            h.NGAYLAP,
-            v.TRANGTHAI
-            FROM VE v
-            JOIN HOADON h ON v.ID_HOADON = h.ID_HOADON
-            WHERE h.ID_TAIKHOAN = N'{userID}'";
+        SELECT 
+        ID_HOADON, 
+        NGAYLAP, 
+        TONGTIEN,
+        TRANGTHAI 
+        FROM HOADON
+        WHERE ID_TAIKHOAN = N'{userID}'
+        ORDER BY NGAYLAP DESC"; // Sắp xếp theo ngày mới nhất
+
             try
             {
-                DataTable dtVe = ketNoi.GetData(query);
-                dgvLichSu.DataSource = dtVe;
+                DataTable dtHoaDon = ketNoi.GetData(query);
+                dgvLichSu.DataSource = dtHoaDon;
+
+                // Cấu hình DataGridView (giữ nguyên)
                 dgvLichSu.RowHeadersVisible = false;
                 dgvLichSu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvLichSu.ReadOnly = true;
@@ -215,14 +223,15 @@ namespace BTL_LapTrinhTrucQuan
                 dgvLichSu.AllowUserToAddRows = false;
                 dgvLichSu.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 dgvLichSu.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                if (dtVe.Rows.Count == 0)
+
+                if (dtHoaDon.Rows.Count == 0)
                 {
-                    MessageBox.Show("Bạn chưa mua vé nào.", "Thông báo");
+                    MessageBox.Show("Bạn chưa có hóa đơn nào.", "Thông báo");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải dữ liệu vé: " + ex.Message, "Lỗi SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải dữ liệu hóa đơn: " + ex.Message, "Lỗi SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -268,61 +277,466 @@ namespace BTL_LapTrinhTrucQuan
             GopY frmGopY = new GopY();
             frmGopY.Show();
         }
+
+
+
+
+
+
+
         //DAT VE
-        public decimal TinhTongTienVeCoDinh(string loaiPhongDuocChon, List<string> danhSachGheDaChon)
+        // Biến toàn cục
+        private string selectedPhimId = "";
+        private string selectedCaChieuId = "";
+        private string selectedLoaiPhongId = "";
+        private List<string> danhSachGheDaChon = new List<string>();
+        private List<int> danhSachGheIdDaChon = new List<int>();
+        private decimal tongTien = 0;
+
+        // Phương thức lấy danh sách ca chiếu theo phim - BỎ LỌC NGÀY
+        private void LoadCaChieuTheoPhim(string phimId)
         {
-            decimal tongTien = 0;
-            decimal giaCoBanPhong = 0;
+            KETNOISQL ketNoi = new KETNOISQL();
 
-            // --- BƯỚC 1: Xác định Giá Cơ Bản của Phòng ---
-            switch (loaiPhongDuocChon.ToUpper())
+            string query = $@"
+        SELECT cc.ID_CACCHIEU, cc.NGAYCHIEU, cc.GIOBATDAU, cc.GIOKETTHUC, 
+               lp.TENLOAIPHONG, cc.GIA, cc.TRANGTHAI
+        FROM CACCHIEU cc
+        JOIN LOAIPHONG lp ON cc.ID_LOAIPHONG = lp.ID_LOAIPHONG
+        WHERE cc.ID_PHIM = {phimId} 
+        AND cc.TRANGTHAI = 1
+        ORDER BY cc.NGAYCHIEU, cc.GIOBATDAU";
+
+            try
             {
-                case "PHÒNG 2D":
-                    giaCoBanPhong = 90000;
-                    break;
-                case "PHÒNG 3D":
-                    giaCoBanPhong = 120000;
-                    break;
-                case "PHÒNG IMAX":
-                    giaCoBanPhong = 150000;
-                    break;
-                default:
-                    // Xử lý trường hợp không xác định được loại phòng
-                    MessageBox.Show("Lỗi: Không xác định được loại phòng đã chọn.");
-                    return 0;
-            }
+                DataTable dtCaChieu = ketNoi.GetData(query);
 
-            // --- BƯỚC 2: Tính Tổng Tiền theo từng Ghế ---
-            foreach (string tenGhe in danhSachGheDaChon)
-            {
-                decimal phuPhiGhe = 0;
+                // Clear combo box trước
+                comboBox1.Items.Clear();
 
-                // **Giả định logic xác định Ghế VIP:**
-                // Ghế VIP là các hàng A, B, C (như trong Form của bạn, 3 hàng trên cùng).
-                // Ghế thường là các hàng D, E, F.
-
-                // Lấy ký tự đầu tiên (Hàng ghế)
-                char hangGhe = tenGhe.FirstOrDefault();
-
-                if (hangGhe == 'A' || hangGhe == 'B' || hangGhe == 'C')
+                if (dtCaChieu.Rows.Count > 0)
                 {
-                    // Ghế VIP: Cộng thêm 15,000
-                    phuPhiGhe = 15000;
+                    foreach (DataRow row in dtCaChieu.Rows)
+                    {
+                        string ngayChieu = Convert.ToDateTime(row["NGAYCHIEU"]).ToString("dd/MM/yyyy");
+                        string displayText = $"{ngayChieu} - {row["GIOBATDAU"]} - {row["TENLOAIPHONG"]}";
+                        string value = row["ID_CACCHIEU"].ToString();
+                        comboBox1.Items.Add(new { Text = displayText, Value = value });
+                    }
+
+                    comboBox1.DisplayMember = "Text";
+                    comboBox1.ValueMember = "Value";
+
+                    if (comboBox1.Items.Count > 0)
+                        comboBox1.SelectedIndex = 0;
                 }
                 else
                 {
-                    // Ghế Thường: Phụ phí 0
-                    phuPhiGhe = 0;
+                    MessageBox.Show("Không có ca chiếu nào cho phim này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                decimal giaVeDon = giaCoBanPhong + phuPhiGhe;
-                tongTien += giaVeDon;
             }
-
-            return tongTien;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải ca chiếu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-}
+        // Phương thức lấy thông tin ghế theo phòng
+        private void LoadGheTheoPhong(string loaiPhongId)
+        {
+            KETNOISQL ketNoi = new KETNOISQL();
+            string query = $@"
+        SELECT g.ID_GHE, g.HANG, g.COT, lg.TENLOAI, lg.GIAGHE,
+               CASE WHEN v.TRANGTHAI = 'SOLD' THEN 1 ELSE 0 END AS DADAT
+        FROM GHE g
+        JOIN LOAIGHE lg ON g.ID_LOAIGHE = lg.ID_LOAIGHE
+        LEFT JOIN VE v ON g.ID_GHE = v.ID_GHE 
+                      AND v.ID_CACCHIEU = {selectedCaChieuId}
+        WHERE g.ID_LOAIPHONG = {loaiPhongId}
+        ORDER BY g.HANG, g.COT";
+
+            try
+            {
+                DataTable dtGhe = ketNoi.GetData(query);
+                HienThiGheLenPanel(dtGhe);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải danh sách ghế: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Phương thức hiển thị ghế lên panel
+        private void HienThiGheLenPanel(DataTable dtGhe)
+        {
+            // Reset panel ghế
+            foreach (Control control in panelGhe.Controls)
+            {
+                if (control is Button btn)
+                {
+                    string hang = btn.Text.Substring(0, 1);
+                    string cot = btn.Text.Substring(1);
+
+                    DataRow[] gheRows = dtGhe.Select($"HANG = '{hang}' AND COT = {cot}");
+                    if (gheRows.Length > 0)
+                    {
+                        bool daDat = Convert.ToBoolean(gheRows[0]["DADAT"]);
+                        string loaiGhe = gheRows[0]["TENLOAI"].ToString();
+
+                        if (daDat)
+                        {
+                            btn.BackColor = Color.Red; // Ghế đã đặt
+                            btn.Enabled = false;
+                        }
+                        else
+                        {
+                            if (loaiGhe == "VIP")
+                            {
+                                btn.BackColor = Color.Gold;
+                            }
+                            else
+                            {
+                                btn.BackColor = Color.LightYellow;
+                            }
+                            btn.Enabled = true;
+                        }
+                    }
+                }
+            }
+
+            // Reset danh sách ghế đã chọn
+            danhSachGheDaChon.Clear();
+            danhSachGheIdDaChon.Clear();
+            CapNhatGheDaChon();
+            TinhTongTien();
+        }
+        // Phương thức xử lý khi click vào ghế
+        private void XuLyChonGhe(Button btnGhe, string tenGhe)
+        {
+            if (!btnGhe.Enabled) return; // Ghế đã đặt thì không cho chọn
+
+            // Lấy ID ghế từ database
+            string hang = tenGhe.Substring(0, 1);
+            string cot = tenGhe.Substring(1);
+
+            KETNOISQL ketNoi = new KETNOISQL();
+            string query = $@"
+        SELECT g.ID_GHE, lg.TENLOAI, lg.GIAGHE
+        FROM GHE g
+        JOIN LOAIGHE lg ON g.ID_LOAIGHE = lg.ID_LOAIGHE
+        WHERE g.HANG = '{hang}' AND g.COT = {cot} 
+        AND g.ID_LOAIPHONG = {selectedLoaiPhongId}";
+
+            try
+            {
+                DataTable dtGhe = ketNoi.GetData(query);
+                if (dtGhe.Rows.Count > 0)
+                {
+                    int gheId = Convert.ToInt32(dtGhe.Rows[0]["ID_GHE"]);
+
+                    // Kiểm tra ghế đã được chọn chưa
+                    if (danhSachGheDaChon.Contains(tenGhe))
+                    {
+                        // Bỏ chọn ghế
+                        danhSachGheDaChon.Remove(tenGhe);
+                        danhSachGheIdDaChon.Remove(gheId);
+
+                        // Đổi màu về trạng thái ban đầu
+                        string loaiGhe = dtGhe.Rows[0]["TENLOAI"].ToString();
+                        btnGhe.BackColor = (loaiGhe == "VIP") ? Color.Gold : Color.LightYellow;
+                    }
+                    else
+                    {
+                        // Chọn ghế
+                        danhSachGheDaChon.Add(tenGhe);
+                        danhSachGheIdDaChon.Add(gheId);
+                        btnGhe.BackColor = Color.LightBlue; // Màu khi được chọn
+                    }
+
+                    CapNhatGheDaChon();
+                    TinhTongTien();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chọn ghế: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Phương thức tính tổng tiền
+        private void TinhTongTien()
+        {
+            tongTien = 0;
+
+            if (string.IsNullOrEmpty(selectedCaChieuId)) return;
+
+            KETNOISQL ketNoi = new KETNOISQL();
+
+            foreach (int gheId in danhSachGheIdDaChon)
+            {
+                string query = $@"
+            SELECT (cc.GIA + lg.GIAGHE) as TONGTIEN
+            FROM CACCHIEU cc
+            JOIN GHE g ON g.ID_LOAIPHONG = cc.ID_LOAIPHONG
+            JOIN LOAIGHE lg ON g.ID_LOAIGHE = lg.ID_LOAIGHE
+            WHERE cc.ID_CACCHIEU = {selectedCaChieuId}
+            AND g.ID_GHE = {gheId}";
+
+                try
+                {
+                    object result = ketNoi.ExecuteScalar(query);
+                    if (result != null && decimal.TryParse(result.ToString(), out decimal giaVe))
+                    {
+                        tongTien += giaVe;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi tính tiền ghế: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            txtSoTien_KH.Text = tongTien.ToString("N0") + " VNĐ";
+        }
+        // Sự kiện khi chọn phim
+        private void btnChonPhim_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaPhim_BDK.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một phim trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            selectedPhimId = txtMaPhim_BDK.Text;
+
+            // Load ca chiếu cho phim đã chọn
+            LoadCaChieuTheoPhim(selectedPhimId);
+
+            // Chuyển sang tab mua vé
+            tabControl1.SelectedIndex = 3;
+
+            MessageBox.Show($"Đã chọn phim: {txtTenPhim_BDK.Text}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // Sự kiện khi chọn ca chiếu
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                dynamic selectedItem = comboBox1.SelectedItem;
+                selectedCaChieuId = selectedItem.Value.ToString();
+
+                // Lấy loại phòng từ ca chiếu
+                KETNOISQL ketNoi = new KETNOISQL();
+                string query = $"SELECT ID_LOAIPHONG FROM CACCHIEU WHERE ID_CACCHIEU = {selectedCaChieuId}";
+
+                try
+                {
+                    object result = ketNoi.ExecuteScalar(query);
+                    if (result != null)
+                    {
+                        selectedLoaiPhongId = result.ToString();
+
+                        // Check radio button tương ứng
+                        switch (selectedLoaiPhongId)
+                        {
+                            case "1": rdbPhong2D_KH.Checked = true; break;
+                            case "2": rdbPhong3D_KH.Checked = true; break;
+                            case "3": rdbPhongIMAX_KH.Checked = true; break;
+                        }
+
+                        // Load ghế theo phòng
+                        LoadGheTheoPhong(selectedLoaiPhongId);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi lấy thông tin ca chiếu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Sự kiện khi xác nhận phòng
+        private void btnXacNhan_KH_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectedCaChieuId))
+            {
+                MessageBox.Show("Vui lòng chọn ca chiếu trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show("Đã xác nhận phòng chiếu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // Sự kiện khi mua vé
+        // Sự kiện khi mua vé
+        private void btnMua_KH_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra validation
+            if (danhSachGheIdDaChon.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn ít nhất một ghế!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!rdbTienMat_KH.Checked && !rdbDienTu_KH.Checked)
+            {
+                MessageBox.Show("Vui lòng chọn phương thức thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedCaChieuId))
+            {
+                MessageBox.Show("Vui lòng chọn ca chiếu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Hiển thị thông tin xác nhận
+            string phuongThucTT = rdbTienMat_KH.Checked ? "Tiền mặt" : "Điện tử";
+            string thongBao = $"Thông tin đặt vé:\n" +
+                             $"Phim: {txtTenPhim_BDK.Text}\n" +
+                             $"Ghế: {txtGheDaChon.Text}\n" +
+                             $"Tổng tiền: {txtSoTien_KH.Text}\n" +
+                             $"Phương thức thanh toán: {phuongThucTT}";
+
+            DialogResult result = MessageBox.Show(thongBao, "Xác nhận đặt vé", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.OK)
+            {
+                if (rdbTienMat_KH.Checked)
+                {
+                    // Thanh toán tiền mặt - xử lý trực tiếp
+                    LuuHoaDonVaVe();
+                }
+                else if (rdbDienTu_KH.Checked)
+                {
+                    // Thanh toán điện tử - mở form ThanhToan
+                    MoFormThanhToan();
+                }
+            }
+        }
+
+        // Phương thức mở form thanh toán điện tử
+        private void MoFormThanhToan()
+        {
+            try
+            {
+                // Lấy tổng tiền từ chuỗi (loại bỏ " VNĐ")
+                string tienStr = txtSoTien_KH.Text.Replace(" VNĐ", "").Replace(",", "").Replace(".", "");
+                if (long.TryParse(tienStr, out long soTien))
+                {
+                    using (ThanhToan formThanhToan = new ThanhToan())
+                    {
+                        formThanhToan.LoadThongTin(soTien);
+
+                        // Hiển thị form ThanhToan dưới dạng dialog
+                        DialogResult result = formThanhToan.ShowDialog();
+
+                        // Khi form ThanhToan đóng (dù bằng nút nào), tiếp tục xử lý
+                        if (result == DialogResult.OK || result == DialogResult.Cancel)
+                        {
+                            // Sau khi thanh toán điện tử thành công hoặc quay về, lưu hóa đơn
+                            LuuHoaDonVaVe();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi chuyển đổi số tiền!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi mở form thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Phương thức lưu hóa đơn và vé
+        // Phương thức lưu hóa đơn và vé
+        private void LuuHoaDonVaVe()
+        {
+            KETNOISQL ketNoi = new KETNOISQL();
+
+            try
+            {
+                // 1. Tạo hóa đơn mới
+                string userId = TaiKhoan.ID;
+                string insertHoaDonQuery = $@"
+            INSERT INTO HOADON (ID_TAIKHOAN, TONGTIEN, TRANGTHAI)
+            VALUES ('{userId}', {tongTien}, 'UNPAID');
+            SELECT SCOPE_IDENTITY();";
+
+                object hoadonIdObj = ketNoi.ExecuteScalar(insertHoaDonQuery);
+
+                if (hoadonIdObj != null)
+                {
+                    int hoadonId = Convert.ToInt32(hoadonIdObj);
+
+                    // 2. Cập nhật các vé đã chọn
+                    foreach (int gheId in danhSachGheIdDaChon)
+                    {
+                        string updateVeQuery = $@"
+                    UPDATE VE 
+                    SET ID_HOADON = {hoadonId}, 
+                        TRANGTHAI = 'SOLD'
+                    WHERE ID_CACCHIEU = {selectedCaChieuId} 
+                    AND ID_GHE = {gheId}";
+
+                        ketNoi.ExecuteNonQuery(updateVeQuery);
+                    }
+
+                    MessageBox.Show("Đặt vé thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Reset form
+                    XoaTatCaGheDaChon();
+                    LoadGheTheoPhong(selectedLoaiPhongId); // Refresh trạng thái ghế
+
+                    // Cập nhật lịch sử
+                    LoadDataHoaDon();
+                    HienThiTongChiTieu();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu hóa đơn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // Phương thức xóa tất cả ghế đã chọn
+        private void XoaTatCaGheDaChon()
+        {
+            danhSachGheDaChon.Clear();
+            danhSachGheIdDaChon.Clear();
+            CapNhatGheDaChon();
+            TinhTongTien();
+        }
+
+        // Phương thức cập nhật textbox ghế đã chọn
+        private void CapNhatGheDaChon()
+        {
+            txtGheDaChon.Text = string.Join(", ", danhSachGheDaChon);
+        }
+        // Phương thức gán sự kiện cho các button ghế
+        private void GanSuKienChoGhe()
+        {
+            // Gán sự kiện Click cho tất cả các button ghế trong panelGhe
+            foreach (Control control in panelGhe.Controls)
+            {
+                if (control is Button btn && !string.IsNullOrEmpty(btn.Text))
+                {
+                    string tenGhe = btn.Text;
+                    btn.Click += (sender, e) => XuLyChonGhe(btn, tenGhe);
+                }
+            }
+        }
+
+        private void btnXoa_KH_Click(object sender, EventArgs e)
+        {
+            XoaTatCaGheDaChon();
+        }
+    }
+
 
 }
+
+
 
