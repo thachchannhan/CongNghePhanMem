@@ -16,6 +16,13 @@ namespace BTL_LapTrinhTrucQuan
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            dangnhap login = new dangnhap();
+
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new FORMKHACHHANG());
+            }
             Application.Run(new FormAdmin());
         }
     }
