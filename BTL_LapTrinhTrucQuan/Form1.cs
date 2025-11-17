@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace BTL_LapTrinhTrucQuan
 {
-    public partial class CapNhat : Form
+    public partial class Form1 : Form
     {
-        public CapNhat()
+        public Form1()
         {
             InitializeComponent();
         }
-
-
     }
 }
