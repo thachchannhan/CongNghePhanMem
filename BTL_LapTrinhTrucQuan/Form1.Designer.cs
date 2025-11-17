@@ -65,25 +65,33 @@
             this.btnthemPhim = new System.Windows.Forms.Button();
             this.dtgridviewPhim = new System.Windows.Forms.DataGridView();
             this.tabSuatChieu = new System.Windows.Forms.TabPage();
+            this.txtboxMaCaChieu_SuatChieu = new System.Windows.Forms.TextBox();
+            this.lblMaCaChieu = new System.Windows.Forms.Label();
+            this.ngayChieuSuatChieu = new System.Windows.Forms.DateTimePicker();
+            this.lblNgayChieuSuatChieu = new System.Windows.Forms.Label();
             this.dtgridviewSuatChieu = new System.Windows.Forms.DataGridView();
-            this.ThoigianketthucSuatChieu = new System.Windows.Forms.DateTimePicker();
             this.ThoigianbatdauSuatChieu = new System.Windows.Forms.DateTimePicker();
-            this.lblThoiGianKetThucCaChieu = new System.Windows.Forms.Label();
             this.lblThoiGianBatDauSuatChieu = new System.Windows.Forms.Label();
             this.btnXoaSuatChieu = new System.Windows.Forms.Button();
             this.btnCapNhatSuatChieu = new System.Windows.Forms.Button();
-            this.btnXoaHetSuatChieu = new System.Windows.Forms.Button();
             this.cmboxMaPhimSuatChieu = new System.Windows.Forms.ComboBox();
             this.lblMaPhimSuatChieu = new System.Windows.Forms.Label();
             this.cmboxPhongSuatChieu = new System.Windows.Forms.ComboBox();
             this.lblPhongSuatChieu = new System.Windows.Forms.Label();
             this.btnThemSuatChieu = new System.Windows.Forms.Button();
-            this.txtBoxGiaVeSuatChieu = new System.Windows.Forms.TextBox();
-            this.lblGiaVeSuatChieu = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblNgayChieuSuatChieu = new System.Windows.Forms.Label();
-            this.ngayChieuSuatChieu = new System.Windows.Forms.DateTimePicker();
+            this.lbltenPhim_BaoCao = new System.Windows.Forms.TabPage();
+            this.dtgridviewBaoCao = new System.Windows.Forms.DataGridView();
+            this.lblThoiGian_BaoCaoDoanhThu = new System.Windows.Forms.Label();
+            this.Time_BaoCaoDoanhThu = new System.Windows.Forms.DateTimePicker();
+            this.rdioNgay_BaoCaoDoanhTHu = new System.Windows.Forms.RadioButton();
+            this.btnXemBaoCao_BaoCaoDoanhThu = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdioNam_BaoCaoDoanhThu = new System.Windows.Forms.RadioButton();
+            this.rdioThang_BaoCaoDoanhThu = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_XemDoanhThuTHeoPhim = new System.Windows.Forms.Button();
+            this.cmboxTenPhim_BaoCao = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -96,7 +104,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgridviewPhim)).BeginInit();
             this.tabSuatChieu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgridviewSuatChieu)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.lbltenPhim_BaoCao.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgridviewBaoCao)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Menu
@@ -226,6 +237,7 @@
             this.btn_baocao.TabIndex = 1;
             this.btn_baocao.Text = "Báo cáo doanh thu";
             this.btn_baocao.UseVisualStyleBackColor = true;
+            this.btn_baocao.Click += new System.EventHandler(this.btn_baocao_Click);
             // 
             // btn_dangxuat
             // 
@@ -253,7 +265,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPhim);
             this.tabControl1.Controls.Add(this.tabSuatChieu);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.lbltenPhim_BaoCao);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControl1.Location = new System.Drawing.Point(-4, 0);
@@ -501,23 +513,20 @@
             // 
             // tabSuatChieu
             // 
+            this.tabSuatChieu.Controls.Add(this.txtboxMaCaChieu_SuatChieu);
+            this.tabSuatChieu.Controls.Add(this.lblMaCaChieu);
             this.tabSuatChieu.Controls.Add(this.ngayChieuSuatChieu);
             this.tabSuatChieu.Controls.Add(this.lblNgayChieuSuatChieu);
             this.tabSuatChieu.Controls.Add(this.dtgridviewSuatChieu);
-            this.tabSuatChieu.Controls.Add(this.ThoigianketthucSuatChieu);
             this.tabSuatChieu.Controls.Add(this.ThoigianbatdauSuatChieu);
-            this.tabSuatChieu.Controls.Add(this.lblThoiGianKetThucCaChieu);
             this.tabSuatChieu.Controls.Add(this.lblThoiGianBatDauSuatChieu);
             this.tabSuatChieu.Controls.Add(this.btnXoaSuatChieu);
             this.tabSuatChieu.Controls.Add(this.btnCapNhatSuatChieu);
-            this.tabSuatChieu.Controls.Add(this.btnXoaHetSuatChieu);
             this.tabSuatChieu.Controls.Add(this.cmboxMaPhimSuatChieu);
             this.tabSuatChieu.Controls.Add(this.lblMaPhimSuatChieu);
             this.tabSuatChieu.Controls.Add(this.cmboxPhongSuatChieu);
             this.tabSuatChieu.Controls.Add(this.lblPhongSuatChieu);
             this.tabSuatChieu.Controls.Add(this.btnThemSuatChieu);
-            this.tabSuatChieu.Controls.Add(this.txtBoxGiaVeSuatChieu);
-            this.tabSuatChieu.Controls.Add(this.lblGiaVeSuatChieu);
             this.tabSuatChieu.Location = new System.Drawing.Point(4, 5);
             this.tabSuatChieu.Name = "tabSuatChieu";
             this.tabSuatChieu.Padding = new System.Windows.Forms.Padding(3);
@@ -525,6 +534,39 @@
             this.tabSuatChieu.TabIndex = 2;
             this.tabSuatChieu.Text = "tabPage3";
             this.tabSuatChieu.UseVisualStyleBackColor = true;
+            // 
+            // txtboxMaCaChieu_SuatChieu
+            // 
+            this.txtboxMaCaChieu_SuatChieu.Location = new System.Drawing.Point(176, 215);
+            this.txtboxMaCaChieu_SuatChieu.Name = "txtboxMaCaChieu_SuatChieu";
+            this.txtboxMaCaChieu_SuatChieu.Size = new System.Drawing.Size(200, 27);
+            this.txtboxMaCaChieu_SuatChieu.TabIndex = 25;
+            // 
+            // lblMaCaChieu
+            // 
+            this.lblMaCaChieu.AutoSize = true;
+            this.lblMaCaChieu.Location = new System.Drawing.Point(53, 222);
+            this.lblMaCaChieu.Name = "lblMaCaChieu";
+            this.lblMaCaChieu.Size = new System.Drawing.Size(106, 20);
+            this.lblMaCaChieu.TabIndex = 24;
+            this.lblMaCaChieu.Text = "Mã Ca Chiếu";
+            // 
+            // ngayChieuSuatChieu
+            // 
+            this.ngayChieuSuatChieu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.ngayChieuSuatChieu.Location = new System.Drawing.Point(546, 148);
+            this.ngayChieuSuatChieu.Name = "ngayChieuSuatChieu";
+            this.ngayChieuSuatChieu.Size = new System.Drawing.Size(200, 27);
+            this.ngayChieuSuatChieu.TabIndex = 23;
+            // 
+            // lblNgayChieuSuatChieu
+            // 
+            this.lblNgayChieuSuatChieu.AutoSize = true;
+            this.lblNgayChieuSuatChieu.Location = new System.Drawing.Point(396, 152);
+            this.lblNgayChieuSuatChieu.Name = "lblNgayChieuSuatChieu";
+            this.lblNgayChieuSuatChieu.Size = new System.Drawing.Size(92, 20);
+            this.lblNgayChieuSuatChieu.TabIndex = 22;
+            this.lblNgayChieuSuatChieu.Text = "Ngày chiếu";
             // 
             // dtgridviewSuatChieu
             // 
@@ -536,35 +578,18 @@
             this.dtgridviewSuatChieu.Size = new System.Drawing.Size(737, 344);
             this.dtgridviewSuatChieu.TabIndex = 21;
             // 
-            // ThoigianketthucSuatChieu
-            // 
-            this.ThoigianketthucSuatChieu.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.ThoigianketthucSuatChieu.Location = new System.Drawing.Point(556, 226);
-            this.ThoigianketthucSuatChieu.Name = "ThoigianketthucSuatChieu";
-            this.ThoigianketthucSuatChieu.Size = new System.Drawing.Size(200, 27);
-            this.ThoigianketthucSuatChieu.TabIndex = 20;
-            // 
             // ThoigianbatdauSuatChieu
             // 
             this.ThoigianbatdauSuatChieu.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.ThoigianbatdauSuatChieu.Location = new System.Drawing.Point(176, 224);
+            this.ThoigianbatdauSuatChieu.Location = new System.Drawing.Point(176, 152);
             this.ThoigianbatdauSuatChieu.Name = "ThoigianbatdauSuatChieu";
             this.ThoigianbatdauSuatChieu.Size = new System.Drawing.Size(200, 27);
             this.ThoigianbatdauSuatChieu.TabIndex = 19;
             // 
-            // lblThoiGianKetThucCaChieu
-            // 
-            this.lblThoiGianKetThucCaChieu.AutoSize = true;
-            this.lblThoiGianKetThucCaChieu.Location = new System.Drawing.Point(396, 231);
-            this.lblThoiGianKetThucCaChieu.Name = "lblThoiGianKetThucCaChieu";
-            this.lblThoiGianKetThucCaChieu.Size = new System.Drawing.Size(141, 20);
-            this.lblThoiGianKetThucCaChieu.TabIndex = 18;
-            this.lblThoiGianKetThucCaChieu.Text = "Thời gian kết thúc";
-            // 
             // lblThoiGianBatDauSuatChieu
             // 
             this.lblThoiGianBatDauSuatChieu.AutoSize = true;
-            this.lblThoiGianBatDauSuatChieu.Location = new System.Drawing.Point(24, 231);
+            this.lblThoiGianBatDauSuatChieu.Location = new System.Drawing.Point(15, 159);
             this.lblThoiGianBatDauSuatChieu.Name = "lblThoiGianBatDauSuatChieu";
             this.lblThoiGianBatDauSuatChieu.Size = new System.Drawing.Size(137, 20);
             this.lblThoiGianBatDauSuatChieu.TabIndex = 17;
@@ -574,7 +599,7 @@
             // 
             this.btnXoaSuatChieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
             this.btnXoaSuatChieu.ForeColor = System.Drawing.Color.White;
-            this.btnXoaSuatChieu.Location = new System.Drawing.Point(428, 308);
+            this.btnXoaSuatChieu.Location = new System.Drawing.Point(556, 308);
             this.btnXoaSuatChieu.Name = "btnXoaSuatChieu";
             this.btnXoaSuatChieu.Size = new System.Drawing.Size(125, 42);
             this.btnXoaSuatChieu.TabIndex = 16;
@@ -586,25 +611,13 @@
             // 
             this.btnCapNhatSuatChieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
             this.btnCapNhatSuatChieu.ForeColor = System.Drawing.Color.White;
-            this.btnCapNhatSuatChieu.Location = new System.Drawing.Point(237, 308);
+            this.btnCapNhatSuatChieu.Location = new System.Drawing.Point(323, 308);
             this.btnCapNhatSuatChieu.Name = "btnCapNhatSuatChieu";
             this.btnCapNhatSuatChieu.Size = new System.Drawing.Size(125, 42);
             this.btnCapNhatSuatChieu.TabIndex = 15;
             this.btnCapNhatSuatChieu.Text = "Cập nhật";
             this.btnCapNhatSuatChieu.UseVisualStyleBackColor = false;
             this.btnCapNhatSuatChieu.Click += new System.EventHandler(this.btnCapNhatSuatChieu_Click);
-            // 
-            // btnXoaHetSuatChieu
-            // 
-            this.btnXoaHetSuatChieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
-            this.btnXoaHetSuatChieu.ForeColor = System.Drawing.Color.White;
-            this.btnXoaHetSuatChieu.Location = new System.Drawing.Point(606, 308);
-            this.btnXoaHetSuatChieu.Name = "btnXoaHetSuatChieu";
-            this.btnXoaHetSuatChieu.Size = new System.Drawing.Size(125, 42);
-            this.btnXoaHetSuatChieu.TabIndex = 14;
-            this.btnXoaHetSuatChieu.Text = "Xóa hết";
-            this.btnXoaHetSuatChieu.UseVisualStyleBackColor = false;
-            this.btnXoaHetSuatChieu.Click += new System.EventHandler(this.btnXoaHetSuatChieu_Click);
             // 
             // cmboxMaPhimSuatChieu
             // 
@@ -644,7 +657,7 @@
             // 
             this.btnThemSuatChieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
             this.btnThemSuatChieu.ForeColor = System.Drawing.Color.White;
-            this.btnThemSuatChieu.Location = new System.Drawing.Point(57, 308);
+            this.btnThemSuatChieu.Location = new System.Drawing.Point(101, 308);
             this.btnThemSuatChieu.Name = "btnThemSuatChieu";
             this.btnThemSuatChieu.Size = new System.Drawing.Size(125, 42);
             this.btnThemSuatChieu.TabIndex = 6;
@@ -652,60 +665,145 @@
             this.btnThemSuatChieu.UseVisualStyleBackColor = false;
             this.btnThemSuatChieu.Click += new System.EventHandler(this.btnThemSuatChieu_Click);
             // 
-            // txtBoxGiaVeSuatChieu
+            // lbltenPhim_BaoCao
             // 
-            this.txtBoxGiaVeSuatChieu.Location = new System.Drawing.Point(176, 145);
-            this.txtBoxGiaVeSuatChieu.Name = "txtBoxGiaVeSuatChieu";
-            this.txtBoxGiaVeSuatChieu.Size = new System.Drawing.Size(151, 27);
-            this.txtBoxGiaVeSuatChieu.TabIndex = 3;
+            this.lbltenPhim_BaoCao.Controls.Add(this.groupBox2);
+            this.lbltenPhim_BaoCao.Controls.Add(this.groupBox1);
+            this.lbltenPhim_BaoCao.Controls.Add(this.dtgridviewBaoCao);
+            this.lbltenPhim_BaoCao.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbltenPhim_BaoCao.Location = new System.Drawing.Point(4, 5);
+            this.lbltenPhim_BaoCao.Name = "lbltenPhim_BaoCao";
+            this.lbltenPhim_BaoCao.Padding = new System.Windows.Forms.Padding(3);
+            this.lbltenPhim_BaoCao.Size = new System.Drawing.Size(773, 736);
+            this.lbltenPhim_BaoCao.TabIndex = 1;
+            this.lbltenPhim_BaoCao.Text = "tabPage2";
+            this.lbltenPhim_BaoCao.UseVisualStyleBackColor = true;
             // 
-            // lblGiaVeSuatChieu
+            // dtgridviewBaoCao
             // 
-            this.lblGiaVeSuatChieu.AutoSize = true;
-            this.lblGiaVeSuatChieu.Location = new System.Drawing.Point(53, 148);
-            this.lblGiaVeSuatChieu.Name = "lblGiaVeSuatChieu";
-            this.lblGiaVeSuatChieu.Size = new System.Drawing.Size(57, 20);
-            this.lblGiaVeSuatChieu.TabIndex = 1;
-            this.lblGiaVeSuatChieu.Text = "Giá vé";
-            this.lblGiaVeSuatChieu.Click += new System.EventHandler(this.label1_Click);
+            this.dtgridviewBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgridviewBaoCao.Location = new System.Drawing.Point(-1, 442);
+            this.dtgridviewBaoCao.Name = "dtgridviewBaoCao";
+            this.dtgridviewBaoCao.RowHeadersWidth = 51;
+            this.dtgridviewBaoCao.RowTemplate.Height = 24;
+            this.dtgridviewBaoCao.Size = new System.Drawing.Size(774, 314);
+            this.dtgridviewBaoCao.TabIndex = 1;
             // 
-            // tabPage2
+            // lblThoiGian_BaoCaoDoanhThu
             // 
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Cursor = System.Windows.Forms.Cursors.No;
-            this.tabPage2.Location = new System.Drawing.Point(4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(773, 736);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.lblThoiGian_BaoCaoDoanhThu.AutoSize = true;
+            this.lblThoiGian_BaoCaoDoanhThu.Location = new System.Drawing.Point(6, 100);
+            this.lblThoiGian_BaoCaoDoanhThu.Name = "lblThoiGian_BaoCaoDoanhThu";
+            this.lblThoiGian_BaoCaoDoanhThu.Size = new System.Drawing.Size(77, 20);
+            this.lblThoiGian_BaoCaoDoanhThu.TabIndex = 2;
+            this.lblThoiGian_BaoCaoDoanhThu.Text = "Thời gian";
             // 
-            // label2
+            // Time_BaoCaoDoanhThu
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(91, 123);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Trang khách hàng";
+            this.Time_BaoCaoDoanhThu.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.Time_BaoCaoDoanhThu.Location = new System.Drawing.Point(115, 100);
+            this.Time_BaoCaoDoanhThu.Name = "Time_BaoCaoDoanhThu";
+            this.Time_BaoCaoDoanhThu.Size = new System.Drawing.Size(134, 27);
+            this.Time_BaoCaoDoanhThu.TabIndex = 3;
             // 
-            // lblNgayChieuSuatChieu
+            // rdioNgay_BaoCaoDoanhTHu
             // 
-            this.lblNgayChieuSuatChieu.AutoSize = true;
-            this.lblNgayChieuSuatChieu.Location = new System.Drawing.Point(396, 152);
-            this.lblNgayChieuSuatChieu.Name = "lblNgayChieuSuatChieu";
-            this.lblNgayChieuSuatChieu.Size = new System.Drawing.Size(92, 20);
-            this.lblNgayChieuSuatChieu.TabIndex = 22;
-            this.lblNgayChieuSuatChieu.Text = "Ngày chiếu";
+            this.rdioNgay_BaoCaoDoanhTHu.AutoSize = true;
+            this.rdioNgay_BaoCaoDoanhTHu.Location = new System.Drawing.Point(6, 224);
+            this.rdioNgay_BaoCaoDoanhTHu.Name = "rdioNgay_BaoCaoDoanhTHu";
+            this.rdioNgay_BaoCaoDoanhTHu.Size = new System.Drawing.Size(119, 24);
+            this.rdioNgay_BaoCaoDoanhTHu.TabIndex = 4;
+            this.rdioNgay_BaoCaoDoanhTHu.TabStop = true;
+            this.rdioNgay_BaoCaoDoanhTHu.Text = "Ngày cụ thể";
+            this.rdioNgay_BaoCaoDoanhTHu.UseVisualStyleBackColor = true;
+            this.rdioNgay_BaoCaoDoanhTHu.CheckedChanged += new System.EventHandler(this.rdioNgay_BaoCaoDoanhTHu_CheckedChanged);
             // 
-            // ngayChieuSuatChieu
+            // btnXemBaoCao_BaoCaoDoanhThu
             // 
-            this.ngayChieuSuatChieu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ngayChieuSuatChieu.Location = new System.Drawing.Point(546, 148);
-            this.ngayChieuSuatChieu.Name = "ngayChieuSuatChieu";
-            this.ngayChieuSuatChieu.Size = new System.Drawing.Size(200, 27);
-            this.ngayChieuSuatChieu.TabIndex = 23;
+            this.btnXemBaoCao_BaoCaoDoanhThu.Location = new System.Drawing.Point(155, 255);
+            this.btnXemBaoCao_BaoCaoDoanhThu.Name = "btnXemBaoCao_BaoCaoDoanhThu";
+            this.btnXemBaoCao_BaoCaoDoanhThu.Size = new System.Drawing.Size(141, 29);
+            this.btnXemBaoCao_BaoCaoDoanhThu.TabIndex = 6;
+            this.btnXemBaoCao_BaoCaoDoanhThu.Text = "Xem doanh thu";
+            this.btnXemBaoCao_BaoCaoDoanhThu.UseVisualStyleBackColor = true;
+            this.btnXemBaoCao_BaoCaoDoanhThu.Click += new System.EventHandler(this.btnXemBaoCao_BaoCaoDoanhThu_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rdioThang_BaoCaoDoanhThu);
+            this.groupBox1.Controls.Add(this.rdioNam_BaoCaoDoanhThu);
+            this.groupBox1.Controls.Add(this.lblThoiGian_BaoCaoDoanhThu);
+            this.groupBox1.Controls.Add(this.Time_BaoCaoDoanhThu);
+            this.groupBox1.Controls.Add(this.rdioNgay_BaoCaoDoanhTHu);
+            this.groupBox1.Controls.Add(this.btnXemBaoCao_BaoCaoDoanhThu);
+            this.groupBox1.Location = new System.Drawing.Point(5, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(359, 374);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Chế độ xem doanh thu";
+            // 
+            // rdioNam_BaoCaoDoanhThu
+            // 
+            this.rdioNam_BaoCaoDoanhThu.AutoSize = true;
+            this.rdioNam_BaoCaoDoanhThu.Location = new System.Drawing.Point(6, 273);
+            this.rdioNam_BaoCaoDoanhThu.Name = "rdioNam_BaoCaoDoanhThu";
+            this.rdioNam_BaoCaoDoanhThu.Size = new System.Drawing.Size(104, 24);
+            this.rdioNam_BaoCaoDoanhThu.TabIndex = 11;
+            this.rdioNam_BaoCaoDoanhThu.TabStop = true;
+            this.rdioNam_BaoCaoDoanhThu.Text = "Theo năm";
+            this.rdioNam_BaoCaoDoanhThu.UseVisualStyleBackColor = true;
+            this.rdioNam_BaoCaoDoanhThu.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // rdioThang_BaoCaoDoanhThu
+            // 
+            this.rdioThang_BaoCaoDoanhThu.AutoSize = true;
+            this.rdioThang_BaoCaoDoanhThu.Location = new System.Drawing.Point(6, 320);
+            this.rdioThang_BaoCaoDoanhThu.Name = "rdioThang_BaoCaoDoanhThu";
+            this.rdioThang_BaoCaoDoanhThu.Size = new System.Drawing.Size(113, 24);
+            this.rdioThang_BaoCaoDoanhThu.TabIndex = 12;
+            this.rdioThang_BaoCaoDoanhThu.TabStop = true;
+            this.rdioThang_BaoCaoDoanhThu.Text = "Theo tháng";
+            this.rdioThang_BaoCaoDoanhThu.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.cmboxTenPhim_BaoCao);
+            this.groupBox2.Controls.Add(this.btn_XemDoanhThuTHeoPhim);
+            this.groupBox2.Location = new System.Drawing.Point(366, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(404, 194);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "xem doanh thu theo phim";
+            // 
+            // btn_XemDoanhThuTHeoPhim
+            // 
+            this.btn_XemDoanhThuTHeoPhim.Location = new System.Drawing.Point(71, 124);
+            this.btn_XemDoanhThuTHeoPhim.Name = "btn_XemDoanhThuTHeoPhim";
+            this.btn_XemDoanhThuTHeoPhim.Size = new System.Drawing.Size(212, 29);
+            this.btn_XemDoanhThuTHeoPhim.TabIndex = 6;
+            this.btn_XemDoanhThuTHeoPhim.Text = "Xem doanh thu theo phim";
+            this.btn_XemDoanhThuTHeoPhim.UseVisualStyleBackColor = true;
+            this.btn_XemDoanhThuTHeoPhim.Click += new System.EventHandler(this.btn_XemDoanhThuTHeoPhim_Click);
+            // 
+            // cmboxTenPhim_BaoCao
+            // 
+            this.cmboxTenPhim_BaoCao.FormattingEnabled = true;
+            this.cmboxTenPhim_BaoCao.Location = new System.Drawing.Point(127, 60);
+            this.cmboxTenPhim_BaoCao.Name = "cmboxTenPhim_BaoCao";
+            this.cmboxTenPhim_BaoCao.Size = new System.Drawing.Size(121, 28);
+            this.cmboxTenPhim_BaoCao.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 20);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Tên phim";
             // 
             // Form1
             // 
@@ -733,8 +831,12 @@
             this.tabSuatChieu.ResumeLayout(false);
             this.tabSuatChieu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgridviewSuatChieu)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.lbltenPhim_BaoCao.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgridviewBaoCao)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -752,10 +854,9 @@
         private System.Windows.Forms.GroupBox Content;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPhim;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage lbltenPhim_BaoCao;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.TabPage tabSuatChieu;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dtgridviewPhim;
         private System.Windows.Forms.Button btnXoaHetPhim;
         private System.Windows.Forms.Button btnXoaPhim;
@@ -778,8 +879,6 @@
         private System.Windows.Forms.ComboBox cmboxTheLoaiPhim;
         private System.Windows.Forms.TextBox txtboxMaPhim;
         private System.Windows.Forms.Label lblmaPhim;
-        private System.Windows.Forms.Label lblGiaVeSuatChieu;
-        private System.Windows.Forms.TextBox txtBoxGiaVeSuatChieu;
         private System.Windows.Forms.Button btnThemSuatChieu;
         private System.Windows.Forms.ComboBox cmboxMaPhimSuatChieu;
         private System.Windows.Forms.Label lblMaPhimSuatChieu;
@@ -787,15 +886,26 @@
         private System.Windows.Forms.Label lblPhongSuatChieu;
         private System.Windows.Forms.Button btnXoaSuatChieu;
         private System.Windows.Forms.Button btnCapNhatSuatChieu;
-        private System.Windows.Forms.Button btnXoaHetSuatChieu;
-        private System.Windows.Forms.Label lblThoiGianKetThucCaChieu;
         private System.Windows.Forms.Label lblThoiGianBatDauSuatChieu;
         private System.Windows.Forms.DataGridView dtgridviewSuatChieu;
-        private System.Windows.Forms.DateTimePicker ThoigianketthucSuatChieu;
         private System.Windows.Forms.DateTimePicker ThoigianbatdauSuatChieu;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.DateTimePicker ngayChieuSuatChieu;
         private System.Windows.Forms.Label lblNgayChieuSuatChieu;
+        private System.Windows.Forms.TextBox txtboxMaCaChieu_SuatChieu;
+        private System.Windows.Forms.Label lblMaCaChieu;
+        private System.Windows.Forms.Button btnXemBaoCao_BaoCaoDoanhThu;
+        private System.Windows.Forms.RadioButton rdioNgay_BaoCaoDoanhTHu;
+        private System.Windows.Forms.DateTimePicker Time_BaoCaoDoanhThu;
+        private System.Windows.Forms.Label lblThoiGian_BaoCaoDoanhThu;
+        private System.Windows.Forms.DataGridView dtgridviewBaoCao;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rdioThang_BaoCaoDoanhThu;
+        private System.Windows.Forms.RadioButton rdioNam_BaoCaoDoanhThu;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn_XemDoanhThuTHeoPhim;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmboxTenPhim_BaoCao;
     }
 }
 

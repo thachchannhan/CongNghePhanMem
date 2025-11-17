@@ -16,7 +16,7 @@ namespace BTL_LapTrinhTrucQuan
         SqlConnection con = null;
         SqlCommand cmd = null;
         SqlDataAdapter da = null;
-        String connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=QLYRAPCHIEUPHIMLAST;Integrated Security=True";
+        String connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=P;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
@@ -38,9 +38,8 @@ namespace BTL_LapTrinhTrucQuan
         {
             con = new SqlConnection(connectionString);
             con.Open();
-            String sql = "select CACCHIEU.ID_CACCHIEU,PHIM.TENPHIM,LOAIPHONG.TENLOAIPHONG,PHONGCHIEU.TENPHONG,CACCHIEU.NGAYCHIEU ,CACCHIEU.GIOBATDAU,CACCHIEU.GIOKETTHUC, CACCHIEU.GIA  from CACCHIEU " +
-                            "inner join PHONGCHIEU on PHONGCHIEU.ID_PHONGCHIEU = CACCHIEU.ID_PHONGCHIEU " +
-                            "inner join LOAIPHONG on LOAIPHONG.ID_LOAIPHONG = PHONGCHIEU.ID_LOAIPHONG " +
+            String sql = "select CACCHIEU.ID_CACCHIEU,PHIM.TENPHIM,LOAIPHONG.TENLOAIPHONG,CACCHIEU.NGAYCHIEU ,CACCHIEU.GIOBATDAU,CACCHIEU.GIOKETTHUC  from CACCHIEU " +
+                            "inner join LOAIPHONG on LOAIPHONG.ID_LOAIPHONG = CACCHIEU.ID_LOAIPHONG " +
                             "inner join PHIM on PHIM.ID_PHIM = CACCHIEU.ID_PHIM";
             cmd = new SqlCommand(sql, con);
             da = new SqlDataAdapter(cmd);
@@ -214,19 +213,20 @@ namespace BTL_LapTrinhTrucQuan
         private void btn_qlysuatchieu_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabSuatChieu;
+           
             loadDataCaChieu();
             LoadComboBox(cmboxMaPhimSuatChieu, "SELECT ID_PHIM , TENPHIM FROM PHIM", "TENPHIM", "ID_PHIM");
-            LoadComboBox(cmboxPhongSuatChieu, "SELECT ID_PHONGCHIEU , TENPHONG FROM PHONGCHIEU", "TENPHONG", "ID_PHONGCHIEU");
+            LoadComboBox(cmboxPhongSuatChieu, "SELECT ID_LOAIPHONG , TENLOAIPHONG FROM LOAIPHONG", "TENLOAIPHONG", "ID_LOAIPHONG");
         }
 
         private void btnXoaSuatChieu_Click(object sender, EventArgs e)
         {
             using (con = new SqlConnection(connectionString))
             {
-                string maphim = cmboxMaPhimSuatChieu.SelectedValue.ToString();
-                string sql = "DELETE FROM CACCHIEU WHERE ID_PHIM = @maphim";
+                string macachieu =txtboxMaCaChieu_SuatChieu.Text;
+                string sql = "DELETE FROM CACCHIEU WHERE ID_CACCHIEU = @macachieu";
                 cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@maphim", maphim);
+                cmd.Parameters.AddWithValue("@macachieu", macachieu);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 con.Close();
@@ -267,20 +267,20 @@ namespace BTL_LapTrinhTrucQuan
         {
             using (con = new SqlConnection(connectionString))
             {
-                int giave = int.Parse(txtBoxGiaVeSuatChieu.Text);
+                string maCaChieu = txtboxMaCaChieu_SuatChieu.Text;
                 string maphim = cmboxMaPhimSuatChieu.SelectedValue.ToString();
                 string maphong = cmboxPhongSuatChieu.SelectedValue.ToString();
                 string giobatdau = ThoigianbatdauSuatChieu.Value.ToString("HH:mm:ss");
-                string gioketthuc = ThoigianketthucSuatChieu.Value.ToString("HH:mm:ss");
                 string NgayChieu = ngayChieuSuatChieu.Value.ToString("yyyy-MM-dd");
-                string sql = "UPDATE CACCHIEU SET ID_PHONGCHIEU = @maphong, " +
-                             "GIOBATDAU = @giobatdau, GIOKETTHUC = @gioketthuc, GIA =@giave, NGAYCHIEU =@ngaychieu   WHERE ID_PHIM = @maphim";
+                string sql = "UPDATE CACCHIEU SET ID_LOAIPHONG = @maphong, " +
+                             "GIOBATDAU = @giobatdau, GIOKETTHUC = DATEADD(Minute,PHIM.THOILUONG + 15,GIOBATDAU), " +
+                             " NGAYCHIEU =@ngaychieu , ID_PHIM= @maphim" +
+                             " from PHIM  WHERE CACCHIEU.ID_CACCHIEU = @macachieu";
                 cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@maphong", maphong);
                 cmd.Parameters.AddWithValue("@giobatdau", giobatdau);
-                cmd.Parameters.AddWithValue("@gioketthuc", gioketthuc);
-                cmd.Parameters.AddWithValue("@giave", giave);
                 cmd.Parameters.AddWithValue("@ngaychieu", NgayChieu);
+                cmd.Parameters.AddWithValue("@macachieu", maCaChieu);
                 cmd.Parameters.AddWithValue("@maphim", maphim);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -304,17 +304,13 @@ namespace BTL_LapTrinhTrucQuan
                 string maphim = cmboxMaPhimSuatChieu.SelectedValue.ToString();
                 string maphong = cmboxPhongSuatChieu.SelectedValue.ToString();
                 string giobatdau = ThoigianbatdauSuatChieu.Value.ToString("HH:mm:ss");
-                string gioketthuc = ThoigianketthucSuatChieu.Value.ToString("HH:mm:ss");
                 string NgayChieu = ngayChieuSuatChieu.Value.ToString("yyyy-MM-dd");
-                int giave = int.Parse(txtBoxGiaVeSuatChieu.Text);
-                string sql = "INSERT INTO CACCHIEU (ID_PHIM, ID_PHONGCHIEU, GIOBATDAU, GIOKETTHUC, GIA,NGAYCHIEU) " +
-                             "VALUES (@maphim, @maphong, @giobatdau, @gioketthuc, @giave,@ngaychieu)";
+                string sql = "INSERT INTO CACCHIEU (ID_PHIM, ID_LOAIPHONG, GIOBATDAU,NGAYCHIEU) " +
+                             "VALUES (@maphim, @maphong, @giobatdau,@ngaychieu)";
                 cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@maphim", maphim);
                 cmd.Parameters.AddWithValue("@maphong", maphong);
                 cmd.Parameters.AddWithValue("@giobatdau", giobatdau);
-                cmd.Parameters.AddWithValue("@gioketthuc", gioketthuc);
-                cmd.Parameters.AddWithValue("@giave", giave);
                 cmd.Parameters.AddWithValue("@ngaychieu", NgayChieu);
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -328,6 +324,93 @@ namespace BTL_LapTrinhTrucQuan
                 {
                     MessageBox.Show("Thêm suất chiếu thất bại!");
                 }
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_baocao_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = lbltenPhim_BaoCao;
+            LoadComboBox(cmboxTenPhim_BaoCao,"SELECT ID_PHIM , TENPHIM FROM PHIM", "TENPHIM", "ID_PHIM");
+            Time_BaoCaoDoanhThu.Enabled = false;
+
+        }
+
+        private void btnXemBaoCao_BaoCaoDoanhThu_Click(object sender, EventArgs e)
+        {
+            using (con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                if (rdioNam_BaoCaoDoanhThu.Checked)
+                {
+                    string sql = "select SUM(TONGTIEN) as N'Số tiền kiếm được' ,year(NGAYLAP) as N'Năm' from HOADON " +
+                                    " WHERE TRANGTHAI = 'PAID' " + 
+                                    " group by year(NGAYLAP) "; 
+                    cmd = new SqlCommand(sql, con);
+                    da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dtgridviewBaoCao.DataSource = dt;
+                }
+                else if (rdioThang_BaoCaoDoanhThu.Checked)
+                {
+                    string sql = "select SUM(TONGTIEN) as N'Số tiền kiếm được' ,year(NGAYLAP) as N'Năm' ,month(NGAYLAP) as N'Tháng' from HOADON " +
+                                    " WHERE TRANGTHAI = 'PAID' " + 
+                                    " group by year(NGAYLAP) ,month(NGAYLAP)";
+                    cmd = new SqlCommand(sql, con);
+                    da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dtgridviewBaoCao.DataSource = dt;
+                }
+                else
+                {
+                    Time_BaoCaoDoanhThu.Enabled = true;
+                    string ngaycuthe = Time_BaoCaoDoanhThu.Value.ToString("yyyy-MM-dd");
+                    string sql = "select SUM(TONGTIEN) as N'Số tiền kiếm được' from HOADON " +
+                        "WHERE CAST(NGAYLAP AS DATE) = @ngaycuthe AND TRANGTHAI = 'PAID'";
+                    cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@ngaycuthe", ngaycuthe);
+                    da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dtgridviewBaoCao.DataSource = dt;
+                }
+            }
+        }
+
+        private void rdioNgay_BaoCaoDoanhTHu_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_XemDoanhThuTHeoPhim_Click(object sender, EventArgs e)
+        {
+            using(con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string maphim = cmboxTenPhim_BaoCao.SelectedValue.ToString();
+                string sql = "select SUM(HOADON.TONGTIEN) as N'Tổng doanh thu' , PHIM.TENPHIM as N'Tên phim' from HOADON " +
+                                "inner join VE on VE.ID_HOADON = HOADON.ID_HOADON " +
+                                "inner join CACCHIEU on CACCHIEU.ID_CACCHIEU = VE.ID_VE " +
+                                "inner join PHIM on PHIM.ID_PHIM = CACCHIEU.ID_PHIM " +
+                                "WHERE PHIM.ID_PHIM = @maphim AND HOADON.TRANGTHAI = 'PAID' " +
+                                "group by PHIM.TENPHIM";
+                cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@maphim", maphim);
+                da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dtgridviewBaoCao.DataSource = dt;
             }
         }
     }
