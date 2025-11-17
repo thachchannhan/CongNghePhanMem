@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace BTL_LapTrinhTrucQuan
 {
-    public partial class Form1 : Form
+    public partial class FormAdmin : Form
     {
         SqlConnection con = null;
         SqlCommand cmd = null;
         SqlDataAdapter da = null;
         String connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=P;Integrated Security=True";
-        public Form1()
+        public FormAdmin()
         {
             InitializeComponent();
         }

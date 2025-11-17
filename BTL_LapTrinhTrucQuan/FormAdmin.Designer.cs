@@ -1,6 +1,6 @@
 ﻿namespace BTL_LapTrinhTrucQuan
 {
-    partial class Form1
+    partial class FormAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdmin));
             this.Menu = new System.Windows.Forms.GroupBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.btn_qlysuatchieu = new System.Windows.Forms.Button();
@@ -720,12 +720,14 @@
             // 
             // btnXemBaoCao_BaoCaoDoanhThu
             // 
+            this.btnXemBaoCao_BaoCaoDoanhThu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
+            this.btnXemBaoCao_BaoCaoDoanhThu.ForeColor = System.Drawing.Color.White;
             this.btnXemBaoCao_BaoCaoDoanhThu.Location = new System.Drawing.Point(155, 255);
             this.btnXemBaoCao_BaoCaoDoanhThu.Name = "btnXemBaoCao_BaoCaoDoanhThu";
             this.btnXemBaoCao_BaoCaoDoanhThu.Size = new System.Drawing.Size(141, 29);
             this.btnXemBaoCao_BaoCaoDoanhThu.TabIndex = 6;
             this.btnXemBaoCao_BaoCaoDoanhThu.Text = "Xem doanh thu";
-            this.btnXemBaoCao_BaoCaoDoanhThu.UseVisualStyleBackColor = true;
+            this.btnXemBaoCao_BaoCaoDoanhThu.UseVisualStyleBackColor = false;
             this.btnXemBaoCao_BaoCaoDoanhThu.Click += new System.EventHandler(this.btnXemBaoCao_BaoCaoDoanhThu_Click);
             // 
             // groupBox1
@@ -780,12 +782,14 @@
             // 
             // btn_XemDoanhThuTHeoPhim
             // 
+            this.btn_XemDoanhThuTHeoPhim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
+            this.btn_XemDoanhThuTHeoPhim.ForeColor = System.Drawing.Color.White;
             this.btn_XemDoanhThuTHeoPhim.Location = new System.Drawing.Point(71, 124);
             this.btn_XemDoanhThuTHeoPhim.Name = "btn_XemDoanhThuTHeoPhim";
             this.btn_XemDoanhThuTHeoPhim.Size = new System.Drawing.Size(212, 29);
             this.btn_XemDoanhThuTHeoPhim.TabIndex = 6;
             this.btn_XemDoanhThuTHeoPhim.Text = "Xem doanh thu theo phim";
-            this.btn_XemDoanhThuTHeoPhim.UseVisualStyleBackColor = true;
+            this.btn_XemDoanhThuTHeoPhim.UseVisualStyleBackColor = false;
             this.btn_XemDoanhThuTHeoPhim.Click += new System.EventHandler(this.btn_XemDoanhThuTHeoPhim_Click);
             // 
             // cmboxTenPhim_BaoCao
