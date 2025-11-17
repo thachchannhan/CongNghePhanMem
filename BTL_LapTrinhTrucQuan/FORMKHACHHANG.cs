@@ -278,6 +278,7 @@ namespace BTL_LapTrinhTrucQuan
         private decimal tongTien = 0;
 
         // Phương thức lấy danh sách ca chiếu theo phim - BỎ LỌC NGÀY
+        // Phương thức lấy danh sách ca chiếu theo phim - CHỈ HIỂN THỊ GIỜ VÀ LOẠI PHÒNG
         private void LoadCaChieuTheoPhim(string phimId)
         {
             KETNOISQL ketNoi = new KETNOISQL();
@@ -289,7 +290,7 @@ namespace BTL_LapTrinhTrucQuan
         JOIN LOAIPHONG lp ON cc.ID_LOAIPHONG = lp.ID_LOAIPHONG
         WHERE cc.ID_PHIM = {phimId} 
         AND cc.TRANGTHAI = 1
-        ORDER BY cc.NGAYCHIEU, cc.GIOBATDAU";
+        ORDER BY cc.GIOBATDAU";
 
             try
             {
@@ -302,8 +303,8 @@ namespace BTL_LapTrinhTrucQuan
                 {
                     foreach (DataRow row in dtCaChieu.Rows)
                     {
-                        string ngayChieu = Convert.ToDateTime(row["NGAYCHIEU"]).ToString("dd/MM/yyyy");
-                        string displayText = $"{ngayChieu} - {row["GIOBATDAU"]} - {row["TENLOAIPHONG"]}";
+                        // CHỈ HIỂN THỊ GIỜ VÀ LOẠI PHÒNG, KHÔNG HIỂN THỊ NGÀY
+                        string displayText = $"{row["GIOBATDAU"]} - {row["TENLOAIPHONG"]}";
                         string value = row["ID_CACCHIEU"].ToString();
                         comboBox1.Items.Add(new { Text = displayText, Value = value });
                     }
@@ -503,6 +504,9 @@ namespace BTL_LapTrinhTrucQuan
         }
 
         // Sự kiện khi chọn ca chiếu
+        // Sự kiện khi chọn ca chiếu
+        // Sự kiện khi chọn ca chiếu
+        // Sự kiện khi chọn ca chiếu
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
@@ -510,23 +514,44 @@ namespace BTL_LapTrinhTrucQuan
                 dynamic selectedItem = comboBox1.SelectedItem;
                 selectedCaChieuId = selectedItem.Value.ToString();
 
-                // Lấy loại phòng từ ca chiếu
+                // Lấy thông tin ca chiếu (bao gồm ngày chiếu và loại phòng)
                 KETNOISQL ketNoi = new KETNOISQL();
-                string query = $"SELECT ID_LOAIPHONG FROM CACCHIEU WHERE ID_CACCHIEU = {selectedCaChieuId}";
+                string query = $"SELECT ID_LOAIPHONG, NGAYCHIEU FROM CACCHIEU WHERE ID_CACCHIEU = {selectedCaChieuId}";
 
                 try
                 {
-                    object result = ketNoi.ExecuteScalar(query);
-                    if (result != null)
+                    DataTable dtCaChieu = ketNoi.GetData(query);
+                    if (dtCaChieu.Rows.Count > 0)
                     {
-                        selectedLoaiPhongId = result.ToString();
+                        DataRow row = dtCaChieu.Rows[0];
+                        selectedLoaiPhongId = row["ID_LOAIPHONG"].ToString();
 
-                        // Check radio button tương ứng
+                        // CẬP NHẬT NGÀY CHIẾU VÀO DATETIMEPICKER
+                        if (row["NGAYCHIEU"] != DBNull.Value)
+                        {
+                            dateTimePicker1.Value = Convert.ToDateTime(row["NGAYCHIEU"]);
+                        }
+
+                        // Ẩn tất cả các radio button trước
+                        rdbPhong2D_KH.Enabled = false;
+                        rdbPhong3D_KH.Enabled = false;
+                        rdbPhongIMAX_KH.Enabled = false;
+
+                        // Bật và check radio button tương ứng với loại phòng của ca chiếu
                         switch (selectedLoaiPhongId)
                         {
-                            case "1": rdbPhong2D_KH.Checked = true; break;
-                            case "2": rdbPhong3D_KH.Checked = true; break;
-                            case "3": rdbPhongIMAX_KH.Checked = true; break;
+                            case "1":
+                                rdbPhong2D_KH.Enabled = true;
+                                rdbPhong2D_KH.Checked = true;
+                                break;
+                            case "2":
+                                rdbPhong3D_KH.Enabled = true;
+                                rdbPhong3D_KH.Checked = true;
+                                break;
+                            case "3":
+                                rdbPhongIMAX_KH.Enabled = true;
+                                rdbPhongIMAX_KH.Checked = true;
+                                break;
                         }
 
                         // Load ghế theo phòng
