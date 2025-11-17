@@ -23,6 +23,7 @@ namespace BTL_LapTrinhTrucQuan
             {
                 Application.Run(new FORMKHACHHANG());
             }
+            Application.Run(new FormAdmin());
         }
     }
 }

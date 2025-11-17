@@ -51,6 +51,11 @@
     </Compile>
     <Compile Include="CapNhat.Designer.cs">
       <DependentUpon>CapNhat.cs</DependentUpon>
+    <Compile Include="FormAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdmin.Designer.cs">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="dangnhap.cs">
       <SubType>Form</SubType>
@@ -91,6 +96,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GopY.resx">
       <DependentUpon>GopY.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdmin.resx">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
