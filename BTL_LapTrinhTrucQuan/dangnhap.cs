@@ -26,13 +26,13 @@ namespace BTL_LapTrinhTrucQuan
         {
             InitializeComponent();
             SendMessage(txtTenDN.Handle, EM_SETCUEBANNER, 0, "User name");
-            SendMessage(txtPassword.Handle, EM_SETCUEBANNER, 0, "Pass word");
+            SendMessage(txtPassWord.Handle, EM_SETCUEBANNER, 0, "Pass word");
         }
 
         private void btnDangnhap_Click(object sender, EventArgs e)
         {
             string tenDN = txtTenDN.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            string password = txtPassWord.Text.Trim();
 
             if (tenDN == "" || password == "")
             {

@@ -46,11 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CapNhat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CapNhat.Designer.cs">
-      <DependentUpon>CapNhat.cs</DependentUpon>
     <Compile Include="FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,9 +80,6 @@
     <Compile Include="ThanhToan.Designer.cs">
       <DependentUpon>ThanhToan.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CapNhat.resx">
-      <DependentUpon>CapNhat.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dangnhap.resx">
       <DependentUpon>dangnhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +88,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GopY.resx">
       <DependentUpon>GopY.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>

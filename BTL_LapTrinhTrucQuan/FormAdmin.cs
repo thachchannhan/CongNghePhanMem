@@ -48,6 +48,34 @@ namespace BTL_LapTrinhTrucQuan
             dtgridviewSuatChieu.DataSource = dt;
             con.Close();
         }
+        void loadDataHoaDon()
+        {
+            con = new SqlConnection (connectionString);
+            con.Open();
+            string sql = $@"
+                        SELECT 
+                            T.ID_TAIKHOAN AS [Mã KH],
+                            T.hoten as [Họ tên KH],
+                            T.SDT, 
+                            T.EMAIL,
+                            H.ID_HOADON AS [Mã HĐ],
+                            H.NGAYLAP AS [Ngày Lập HĐ],
+                            H.TONGTIEN AS [Tổng Tiền HĐ],
+                            H.TRANGTHAI AS [Trạng thái HĐ]
+                        FROM 
+                            HOADON H
+                        JOIN 
+                            TAIKHOAN T ON H.ID_TAIKHOAN = T.ID_TAIKHOAN
+                        where T.ID_TAiKHOAN <> N'Admin01'  
+                        ORDER BY 
+                            H.NGAYLAP DESC, H.ID_HOADON";
+            cmd = new SqlCommand(sql, con);
+            da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dtgridviewKH.DataSource = dt;
+            con.Close();
+        }
         void LoadComboBox(ComboBox cbo, string query, string display, string value)
         {
             using (con = new SqlConnection(connectionString))
@@ -412,6 +440,75 @@ namespace BTL_LapTrinhTrucQuan
                 da.Fill(dt);
                 dtgridviewBaoCao.DataSource = dt;
             }
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_timkiem_QLKH_Click(object sender, EventArgs e)
+        {
+            string matk = txtMAKH.Text;
+            string hotenkh = txtHOTEN.Text;
+            string SDT = txtSDT.Text;
+            string email = txtEMAIL.Text;
+            string sql = $@"
+                        SELECT 
+                            T.ID_TAIKHOAN AS [Mã KH],
+                            T.hoten as [Họ tên KH],
+                            T.SDT, 
+                            T.EMAIL,
+                            H.ID_HOADON AS [Mã HĐ],
+                            H.NGAYLAP AS [Ngày Lập HĐ],
+                            H.TONGTIEN AS [Tổng Tiền HĐ],
+                            H.TRANGTHAI AS [Trạng thái HĐ]
+                        FROM 
+                            HOADON H
+                        JOIN 
+                            TAIKHOAN T ON H.ID_TAIKHOAN = T.ID_TAIKHOAN
+                        where T.ID_TAiKHOAN <> N'Admin01' and  (T.ID_TAIKHOAN =@matk or T.hoten =@ht or T.sdt=@sdt or T.EMAIL = @email)
+                        ORDER BY 
+                            H.NGAYLAP DESC, H.ID_HOADON";
+            using (con = new SqlConnection(connectionString))
+            {
+                cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@matk", matk);
+                cmd.Parameters.AddWithValue("@ht", hotenkh);
+                cmd.Parameters.AddWithValue("@sdt", SDT);
+                cmd.Parameters.AddWithValue("@email", email);
+                da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dtgridviewKH.DataSource = dt;
+            }
+        }
+
+        private void btn_qlkh_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabKhachHang;
+            loadDataHoaDon(); 
+        }
+
+        private void btn_lammoi_QLKH_Click(object sender, EventArgs e)
+        {
+            loadDataHoaDon(); 
+            txtSDT.Clear();
+            txtMAKH.Clear();
+            txtHOTEN.Clear();
+            txtEMAIL.Clear();
+        }
+
+        private void btn_dangxuat_Click(object sender, EventArgs e)
+        {
+            dangnhap dn = new dangnhap();
+            dn.Show();
+            this.Hide();
         }
     }
 }

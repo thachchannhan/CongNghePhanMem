@@ -21,9 +21,15 @@ namespace BTL_LapTrinhTrucQuan
 
             if (login.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new FORMKHACHHANG());
+                if(TaiKhoan.Quyen == "ADMIN")
+                {
+                    Application.Run(new FormAdmin());
+                }
+                else
+                {
+                    Application.Run(new FORMKHACHHANG());
+                }
             }
-            Application.Run(new FormAdmin());
         }
     }
 }
