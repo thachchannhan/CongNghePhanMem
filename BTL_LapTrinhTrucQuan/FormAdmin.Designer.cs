@@ -107,6 +107,11 @@
             this.rdioNgay_BaoCaoDoanhTHu = new System.Windows.Forms.RadioButton();
             this.btnXemBaoCao_BaoCaoDoanhThu = new System.Windows.Forms.Button();
             this.dtgridviewBaoCao = new System.Windows.Forms.DataGridView();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btn_XuatDoanhThu = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rdio_Word = new System.Windows.Forms.RadioButton();
+            this.rdio_Excel = new System.Windows.Forms.RadioButton();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -127,6 +132,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgridviewBaoCao)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // Menu
@@ -845,6 +851,7 @@
             // 
             // lbltenPhim_BaoCao
             // 
+            this.lbltenPhim_BaoCao.Controls.Add(this.groupBox5);
             this.lbltenPhim_BaoCao.Controls.Add(this.groupBox2);
             this.lbltenPhim_BaoCao.Controls.Add(this.groupBox1);
             this.lbltenPhim_BaoCao.Controls.Add(this.dtgridviewBaoCao);
@@ -865,7 +872,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Modern No. 20", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(366, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(404, 194);
+            this.groupBox2.Size = new System.Drawing.Size(404, 223);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "xem doanh thu theo phim";
@@ -891,9 +898,9 @@
             // 
             this.btn_XemDoanhThuTHeoPhim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
             this.btn_XemDoanhThuTHeoPhim.ForeColor = System.Drawing.Color.White;
-            this.btn_XemDoanhThuTHeoPhim.Location = new System.Drawing.Point(71, 124);
+            this.btn_XemDoanhThuTHeoPhim.Location = new System.Drawing.Point(71, 143);
             this.btn_XemDoanhThuTHeoPhim.Name = "btn_XemDoanhThuTHeoPhim";
-            this.btn_XemDoanhThuTHeoPhim.Size = new System.Drawing.Size(212, 29);
+            this.btn_XemDoanhThuTHeoPhim.Size = new System.Drawing.Size(248, 29);
             this.btn_XemDoanhThuTHeoPhim.TabIndex = 6;
             this.btn_XemDoanhThuTHeoPhim.Text = "Xem doanh thu theo phim";
             this.btn_XemDoanhThuTHeoPhim.UseVisualStyleBackColor = false;
@@ -910,7 +917,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Modern No. 20", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(5, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(359, 374);
+            this.groupBox1.Size = new System.Drawing.Size(359, 387);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chế độ xem doanh thu";
@@ -971,9 +978,9 @@
             // 
             this.btnXemBaoCao_BaoCaoDoanhThu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
             this.btnXemBaoCao_BaoCaoDoanhThu.ForeColor = System.Drawing.Color.White;
-            this.btnXemBaoCao_BaoCaoDoanhThu.Location = new System.Drawing.Point(155, 255);
+            this.btnXemBaoCao_BaoCaoDoanhThu.Location = new System.Drawing.Point(155, 287);
             this.btnXemBaoCao_BaoCaoDoanhThu.Name = "btnXemBaoCao_BaoCaoDoanhThu";
-            this.btnXemBaoCao_BaoCaoDoanhThu.Size = new System.Drawing.Size(141, 29);
+            this.btnXemBaoCao_BaoCaoDoanhThu.Size = new System.Drawing.Size(198, 29);
             this.btnXemBaoCao_BaoCaoDoanhThu.TabIndex = 6;
             this.btnXemBaoCao_BaoCaoDoanhThu.Text = "Xem doanh thu";
             this.btnXemBaoCao_BaoCaoDoanhThu.UseVisualStyleBackColor = false;
@@ -988,6 +995,54 @@
             this.dtgridviewBaoCao.RowTemplate.Height = 24;
             this.dtgridviewBaoCao.Size = new System.Drawing.Size(774, 314);
             this.dtgridviewBaoCao.TabIndex = 1;
+            // 
+            // btn_XuatDoanhThu
+            // 
+            this.btn_XuatDoanhThu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(175)))), ((int)(((byte)(72)))));
+            this.btn_XuatDoanhThu.Font = new System.Drawing.Font("Modern No. 20", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btn_XuatDoanhThu.ForeColor = System.Drawing.Color.White;
+            this.btn_XuatDoanhThu.Location = new System.Drawing.Point(85, 96);
+            this.btn_XuatDoanhThu.Name = "btn_XuatDoanhThu";
+            this.btn_XuatDoanhThu.Size = new System.Drawing.Size(198, 29);
+            this.btn_XuatDoanhThu.TabIndex = 12;
+            this.btn_XuatDoanhThu.Text = "Xuất doanh thu ra file";
+            this.btn_XuatDoanhThu.UseVisualStyleBackColor = false;
+            this.btn_XuatDoanhThu.Click += new System.EventHandler(this.btn_XuatDoanhThu_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rdio_Excel);
+            this.groupBox5.Controls.Add(this.rdio_Word);
+            this.groupBox5.Controls.Add(this.btn_XuatDoanhThu);
+            this.groupBox5.Font = new System.Drawing.Font("Modern No. 20", 10.2F, System.Drawing.FontStyle.Bold);
+            this.groupBox5.Location = new System.Drawing.Point(364, 230);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(405, 163);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Xuất doanh thu ra file theo định dạng";
+            // 
+            // rdio_Word
+            // 
+            this.rdio_Word.AutoSize = true;
+            this.rdio_Word.Location = new System.Drawing.Point(26, 49);
+            this.rdio_Word.Name = "rdio_Word";
+            this.rdio_Word.Size = new System.Drawing.Size(73, 24);
+            this.rdio_Word.TabIndex = 13;
+            this.rdio_Word.TabStop = true;
+            this.rdio_Word.Text = "Word";
+            this.rdio_Word.UseVisualStyleBackColor = true;
+            // 
+            // rdio_Excel
+            // 
+            this.rdio_Excel.AutoSize = true;
+            this.rdio_Excel.Location = new System.Drawing.Point(231, 49);
+            this.rdio_Excel.Name = "rdio_Excel";
+            this.rdio_Excel.Size = new System.Drawing.Size(74, 24);
+            this.rdio_Excel.TabIndex = 14;
+            this.rdio_Excel.TabStop = true;
+            this.rdio_Excel.Text = "Excel";
+            this.rdio_Excel.UseVisualStyleBackColor = true;
             // 
             // FormAdmin
             // 
@@ -1027,6 +1082,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgridviewBaoCao)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1111,6 +1168,11 @@
         private System.Windows.Forms.Label lblSDTKH;
         private System.Windows.Forms.Label lblMaKH;
         private System.Windows.Forms.Label lblHoTenKH;
+        private System.Windows.Forms.Button btn_XuatDoanhThu;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rdio_Excel;
+        private System.Windows.Forms.RadioButton rdio_Word;
     }
 }
 

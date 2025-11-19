@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ClosedXML.Excel;
+using Word = Microsoft.Office.Interop.Word;
 namespace BTL_LapTrinhTrucQuan
 {
     public partial class FormAdmin : Form
@@ -87,6 +88,58 @@ namespace BTL_LapTrinhTrucQuan
                 cbo.DisplayMember = display;
                 cbo.ValueMember = value;
             }
+        }
+        public void ExportDataGridViewToExcel(DataGridView dgv, string filePath)
+        {
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Sheet1");
+
+            for (int col = 0; col < dgv.Columns.Count; col++)
+            {
+                worksheet.Cell(1, col + 1).Value = dgv.Columns[col].HeaderText;
+            }
+
+            for (int row = 0; row < dgv.Rows.Count; row++)
+            {
+                for (int col = 0; col < dgv.Columns.Count; col++)
+                {
+                    worksheet.Cell(row + 2, col + 1).Value =
+                        dgv.Rows[row].Cells[col].Value?.ToString() ?? "";
+                }
+            }
+
+            worksheet.Columns().AdjustToContents();
+            workbook.SaveAs(filePath);
+        }
+        public void ExportToWord(DataGridView dgv, string filePath)
+        {
+            Word.Application wordApp = new Word.Application();
+            Word.Document doc = wordApp.Documents.Add();
+
+            Word.Range range = doc.Range();
+            Word.Table table = doc.Tables.Add(range, dgv.Rows.Count + 1, dgv.Columns.Count);
+            table.Borders.Enable = 1;
+
+            // Header
+            for (int col = 0; col < dgv.Columns.Count; col++)
+            {
+                table.Cell(1, col + 1).Range.Text = dgv.Columns[col].HeaderText;
+                table.Cell(1, col + 1).Range.Bold = 1;
+            }
+
+            // Data
+            for (int row = 0; row < dgv.Rows.Count; row++)
+            {
+                for (int col = 0; col < dgv.Columns.Count; col++)
+                {
+                    table.Cell(row + 2, col + 1).Range.Text =
+                        dgv.Rows[row].Cells[col].Value?.ToString() ?? "";
+                }
+            }
+
+            doc.SaveAs2(filePath);
+            doc.Close();
+            wordApp.Quit();
         }
         private void Menu_Enter(object sender, EventArgs e)
         {
@@ -509,6 +562,37 @@ namespace BTL_LapTrinhTrucQuan
             dangnhap dn = new dangnhap();
             dn.Show();
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_XuatDoanhThu_Click(object sender, EventArgs e)
+        {
+            if (rdio_Excel.Checked)
+            {
+                saveFileDialog1.Filter ="Excel Files|*.xlsx";
+                saveFileDialog1.FileName = "doanhthu.xlsx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    ExportDataGridViewToExcel(dtgridviewBaoCao, filePath);
+                    MessageBox.Show("Xuất báo cáo thành công!");
+                }
+            }
+            else
+            {
+                saveFileDialog1.Filter = "Word Files|*.docx";
+                saveFileDialog1.FileName = "doanhthu.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    ExportToWord(dtgridviewBaoCao, filePath);
+                    MessageBox.Show("Xuất báo cáo thành công!");
+                }
+            }
         }
     }
 }
