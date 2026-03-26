@@ -17,7 +17,7 @@ namespace BTL_LapTrinhTrucQuan
         SqlConnection con = null;
         SqlCommand cmd = null;
         SqlDataAdapter da = null;
-        String connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=P;Integrated Security=True";
+        String connectionString ="Data Source=DESKTOP-V7DI0T1;Initial Catalog=P;Integrated Security=True;";
         public FormAdmin()
         {
             InitializeComponent();
@@ -251,25 +251,6 @@ namespace BTL_LapTrinhTrucQuan
             }
         }
 
-        private void btnXoaHetPhim_Click(object sender, EventArgs e)
-        {
-            string sql = "DELETE FROM PHIM";
-            con = new SqlConnection(connectionString);
-            cmd = new SqlCommand(sql, con);
-            con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            con.Close();
-            if (rowsAffected > 0)
-            {
-                MessageBox.Show("Xóa hết phim thành công!");
-                loadDataPhim();
-            }
-            else
-            {
-                MessageBox.Show("Xóa hết phim thất bại!");
-            }
-        }
-
         private void lblTheLoaiPhim_Click(object sender, EventArgs e)
         {
 
@@ -289,6 +270,7 @@ namespace BTL_LapTrinhTrucQuan
         {
             tabControl1.SelectedTab = tabPhim;
             loadDataPhim();
+            cmboxTheLoaiPhim.SelectedIndex = 0;
         }
 
         private void btn_qlysuatchieu_Click(object sender, EventArgs e)
@@ -559,9 +541,14 @@ namespace BTL_LapTrinhTrucQuan
 
         private void btn_dangxuat_Click(object sender, EventArgs e)
         {
-            dangnhap dn = new dangnhap();
-            dn.Show();
-            this.Hide();
+
+    // Clear session trước
+    TaiKhoan.ClearSession();
+    
+    // Đóng form khách hàng
+    this.DialogResult = DialogResult.Abort; // Hoặc DialogResult.Cancel
+    this.Close();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -594,5 +581,12 @@ namespace BTL_LapTrinhTrucQuan
                 }
             }
         }
+
+        private void FormAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

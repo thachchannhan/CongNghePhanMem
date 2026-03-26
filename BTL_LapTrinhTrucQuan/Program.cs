@@ -17,17 +17,53 @@ namespace BTL_LapTrinhTrucQuan
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            dangnhap login = new dangnhap();
+            bool shouldRestart = true;
 
-            if (login.ShowDialog() == DialogResult.OK)
+            while (shouldRestart)
             {
-                if(TaiKhoan.Quyen == "ADMIN")
+                TaiKhoan.ClearSession();
+
+                using (dangnhap login = new dangnhap())
                 {
-                    Application.Run(new FormAdmin());
-                }
-                else
-                {
-                    Application.Run(new FORMKHACHHANG());
+                    DialogResult loginResult = login.ShowDialog();
+
+                  
+                    if (loginResult != DialogResult.OK)
+                    {
+                        shouldRestart = false;
+                        break;
+                    }
+
+                    if (TaiKhoan.Quyen == "ADMIN")
+                    {
+                        using (FormAdmin adminForm = new FormAdmin())
+                        {
+                            DialogResult adminResult = adminForm.ShowDialog();
+                            if (adminResult == DialogResult.Abort || adminResult == DialogResult.Cancel)
+                            {
+                                shouldRestart = true;
+                            }
+                            else
+                            {
+                                shouldRestart = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (FORMKHACHHANG userForm = new FORMKHACHHANG())
+                        {
+                            DialogResult userResult = userForm.ShowDialog();
+                            if (userResult == DialogResult.Abort || userResult == DialogResult.Cancel)
+                            {
+                                shouldRestart = true;
+                            }
+                            else
+                            {
+                                shouldRestart = false; 
+                            }
+                        }
+                    }
                 }
             }
         }

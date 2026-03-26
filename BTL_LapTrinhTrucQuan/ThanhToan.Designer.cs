@@ -85,8 +85,7 @@
             "VNPay",
             "MB Bank",
             "Agribank",
-            "SHB",
-            "HaichanBank"});
+            "SHB"});
             this.comboBox1.Location = new System.Drawing.Point(125, 74);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(1);
             this.comboBox1.Name = "comboBox1";

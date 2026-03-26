@@ -15,7 +15,7 @@ namespace BTL_LapTrinhTrucQuan
         // 🧱 Hàm khởi tạo - thay chuỗi kết nối của bạn vào đây
         public KETNOISQL()
         {
-            connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=P;Integrated Security=True";
+            connectionString = "Data Source=DESKTOP-V7DI0T1;Initial Catalog=P;Integrated Security=True;";
         }
 
         // 📥 Lấy dữ liệu (SELECT)

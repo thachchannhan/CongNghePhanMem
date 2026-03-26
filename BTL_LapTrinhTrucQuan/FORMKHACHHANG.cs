@@ -57,21 +57,13 @@ namespace BTL_LapTrinhTrucQuan
         private void btnDX_Click(object sender, EventArgs e)
         {
 
-            this.Hide();
-            using (dangnhap dnForm = new dangnhap())
-            {
-                if (dnForm.ShowDialog() == DialogResult.OK)
-                {
+            // Clear session trước
+            TaiKhoan.ClearSession();
 
-                    this.Show();
-                }
-                else
-                {
-
-                    Application.Exit();
-                }
-            }
-
+            // Đóng form khách hàng
+            this.DialogResult = DialogResult.Abort; // Hoặc DialogResult.Cancel
+            this.Close();
+        
         }
         //TABPAGE BANGDIEUKHIEN
         private void LoadDataPHIM()
@@ -460,10 +452,11 @@ namespace BTL_LapTrinhTrucQuan
             foreach (int gheId in danhSachGheIdDaChon)
             {
                 string query = $@"
-            SELECT (cc.GIA + lg.GIAGHE) as TONGTIEN
+            SELECT (lp.GIAPHONG + lg.GIAGHE) as TONGTIEN
             FROM CACCHIEU cc
             JOIN GHE g ON g.ID_LOAIPHONG = cc.ID_LOAIPHONG
             JOIN LOAIGHE lg ON g.ID_LOAIGHE = lg.ID_LOAIGHE
+            join LOAIPHONG lp on lp.ID_LOAIPHONG=cc.ID_LOAIPHONG
             WHERE cc.ID_CACCHIEU = {selectedCaChieuId}
             AND g.ID_GHE = {gheId}";
 
@@ -672,7 +665,7 @@ namespace BTL_LapTrinhTrucQuan
                 string userId = TaiKhoan.ID;
                 string insertHoaDonQuery = $@"
             INSERT INTO HOADON (ID_TAIKHOAN, TONGTIEN, TRANGTHAI)
-            VALUES ('{userId}', {tongTien}, 'UNPAID');
+            VALUES ('{userId}', {tongTien}, 'PAID');
             SELECT SCOPE_IDENTITY();";
 
                 object hoadonIdObj = ketNoi.ExecuteScalar(insertHoaDonQuery);
